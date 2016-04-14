@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const config = require('./config');
 const request = require('request');
 
+const TOKEN = config('PAGE_ACCESS_TOKEN');
+
 let app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -46,8 +48,7 @@ app.listen(app.get('port'), (err) => {
   console.log('Running on port', app.get('port'));
 });
 
-const TOKEN = config('PAGE_ACCESS_TOKEN');
-function sendTextMessage(sender, text) {
+let sendTextMessage = (sender, text) => {
   let messageData = {
     text: text
   };
@@ -58,7 +59,7 @@ function sendTextMessage(sender, text) {
     method: 'POST',
     json: {
       recipient: {id: sender},
-      message: messageData,
+      message: messageData
     }
   }, function(error, response, body) {
     if (error) {
@@ -69,4 +70,4 @@ function sendTextMessage(sender, text) {
       console.log('Success: ', response.body);
     }
   });
-}
+};
