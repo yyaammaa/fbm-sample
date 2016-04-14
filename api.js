@@ -4,23 +4,52 @@ const config = require('./config');
 const request = require('request');
 const TOKEN = config('PAGE_ACCESS_TOKEN');
 
+/**
+ *
+ * row send api
+ *
+ * @param sender: mandatory
+ * @param message: mandatory
+ * @param notificationType: optional: REGULAR, SILENT_PUSH, NO_PUSH
+ * @param callback: optional: aa
+ */
+let send = (sender, message, notificationType, callback)=> {
+  const type = notificationType || 'SILENT_PUSH';
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token: TOKEN},
+    method: 'POST',
+    json: {
+      recipient: {id: sender},
+      message: message,
+      notification_type: type
+    }
+  }, function(error, response, body) {
+    if (callback) callback(error, response, body);
+  });
+};
+
 let api = {
   sendTextMessage: (sender, text, callback) => {
     let messageData = {
       text: text
     };
 
-    request({
-      url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {access_token: TOKEN},
-      method: 'POST',
-      json: {
-        recipient: {id: sender},
-        message: messageData
-      }
-    }, function(error, response, body) {
+    send(sender, messageData, (error, response, body)=> {
       if (callback) callback(error, response, body);
     });
+
+    //request({
+    //  url: 'https://graph.facebook.com/v2.6/me/messages',
+    //  qs: {access_token: TOKEN},
+    //  method: 'POST',
+    //  json: {
+    //    recipient: {id: sender},
+    //    message: messageData
+    //  }
+    //}, function(error, response, body) {
+    //  if (callback) callback(error, response, body);
+    //});
   },
 
   sendGenericMessage: (sender, callback) => {
