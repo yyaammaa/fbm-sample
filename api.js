@@ -38,18 +38,6 @@ let api = {
     send(sender, messageData, (error, response, body)=> {
       if (callback) callback(error, response, body);
     });
-
-    //request({
-    //  url: 'https://graph.facebook.com/v2.6/me/messages',
-    //  qs: {access_token: TOKEN},
-    //  method: 'POST',
-    //  json: {
-    //    recipient: {id: sender},
-    //    message: messageData
-    //  }
-    //}, function(error, response, body) {
-    //  if (callback) callback(error, response, body);
-    //});
   },
 
   sendGenericMessage: (sender, callback) => {
@@ -85,15 +73,7 @@ let api = {
       }
     };
 
-    request({
-      url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {access_token: TOKEN},
-      method: 'POST',
-      json: {
-        recipient: {id: sender},
-        message: messageData
-      }
-    }, (error, response, body) => {
+    send(sender, messageData, (error, response, body)=> {
       if (callback) callback(error, response, body);
     });
   }
