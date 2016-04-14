@@ -5,7 +5,6 @@ const request = require('request');
 const TOKEN = config('PAGE_ACCESS_TOKEN');
 
 /**
- *
  * row send api
  *
  * @param sender: mandatory
