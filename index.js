@@ -16,6 +16,13 @@ app.get('/', (request, response) => {
   response.send('\n 🌍 \n');
 });
 
+app.get('/webhook/', (req, res) => {
+  if (req.query['hub.verify_token'] === '<validation_token>') {
+    res.send(req.query['hub.challenge']);
+  }
+  res.send('Error, wrong validation token');
+});
+
 app.listen(app.get('port'), (err) => {
   if (err) throw err;
 
