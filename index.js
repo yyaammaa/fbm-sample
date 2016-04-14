@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('./config');
+const request = require('request');
 
 let app = express();
 
@@ -50,6 +51,7 @@ function sendTextMessage(sender, text) {
   let messageData = {
     text: text
   };
+
   request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {access_token: TOKEN},
