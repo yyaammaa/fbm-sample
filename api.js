@@ -2,10 +2,27 @@
 
 const config = require('./config');
 const request = require('request');
-
 const TOKEN = config('PAGE_ACCESS_TOKEN');
 
 let api = {
+  sendTextMessage: (sender, text, callback) => {
+    let messageData = {
+      text: text
+    };
+
+    request({
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {access_token: TOKEN},
+      method: 'POST',
+      json: {
+        recipient: {id: sender},
+        message: messageData
+      }
+    }, function(error, response, body) {
+      if (callback) callback(error, response, body);
+    });
+  },
+
   sendGenericMessage: (sender, callback) => {
     const messageData = {
       "attachment": {
