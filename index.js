@@ -1,14 +1,10 @@
 'use strict';
 
 const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
-const config = require('./config');
 const request = require('request');
 const api = require('./api');
-
-const TOKEN = config('PAGE_ACCESS_TOKEN');
-
-let app = express();
 
 app.set('port', (process.env.PORT || 5000));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -37,7 +33,7 @@ app.post('/webhook/', (req, res) => {
 
     if (event.postback) {
       let text = JSON.stringify(event.postback);
-      sendTextMessage(sender, "Postback received: " + text.substring(0, 200), TOKEN);
+      sendTextMessage(sender, "Postback received: " + text.substring(0, 200));
       continue;
     }
 
