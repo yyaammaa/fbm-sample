@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('./config');
 const request = require('request');
+const api = require('./api');
 
 const TOKEN = config('PAGE_ACCESS_TOKEN');
 
@@ -61,47 +62,7 @@ app.listen(app.get('port'), (err) => {
 });
 
 let sendGenericMessage = (sender) => {
-  const messageData = {
-    "attachment": {
-      "type": "template",
-      "payload": {
-        "template_type": "generic",
-        "elements": [{
-          "title": "First card",
-          "subtitle": "Element #1 of an hscroll",
-          "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
-          "buttons": [{
-            "type": "web_url",
-            "url": "https://www.messenger.com/",
-            "title": "Web url"
-          }, {
-            "type": "postback",
-            "title": "Postback",
-            "payload": "Payload for first element in a generic bubble",
-          }],
-        }, {
-          "title": "Second card",
-          "subtitle": "Element #2 of an hscroll",
-          "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-          "buttons": [{
-            "type": "postback",
-            "title": "Postback",
-            "payload": "Payload for second element in a generic bubble",
-          }],
-        }]
-      }
-    }
-  };
-
-  request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token: TOKEN},
-    method: 'POST',
-    json: {
-      recipient: {id: sender},
-      message: messageData
-    }
-  }, function(error, response, body) {
+  api.sendGenericMessage(sender, (error, response, body)=> {
     if (error) {
       console.log('Error sending message: ', error);
     } else if (response.body.error) {
@@ -110,6 +71,57 @@ let sendGenericMessage = (sender) => {
       console.log('Success: ', response.body);
     }
   });
+
+  //
+  //const messageData = {
+  //  "attachment": {
+  //    "type": "template",
+  //    "payload": {
+  //      "template_type": "generic",
+  //      "elements": [{
+  //        "title": "First card",
+  //        "subtitle": "Element #1 of an hscroll",
+  //        "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+  //        "buttons": [{
+  //          "type": "web_url",
+  //          "url": "https://www.messenger.com/",
+  //          "title": "Web url"
+  //        }, {
+  //          "type": "postback",
+  //          "title": "Postback",
+  //          "payload": "Payload for first element in a generic bubble",
+  //        }],
+  //      }, {
+  //        "title": "Second card",
+  //        "subtitle": "Element #2 of an hscroll",
+  //        "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+  //        "buttons": [{
+  //          "type": "postback",
+  //          "title": "Postback",
+  //          "payload": "Payload for second element in a generic bubble",
+  //        }],
+  //      }]
+  //    }
+  //  }
+  //};
+  //
+  //request({
+  //  url: 'https://graph.facebook.com/v2.6/me/messages',
+  //  qs: {access_token: TOKEN},
+  //  method: 'POST',
+  //  json: {
+  //    recipient: {id: sender},
+  //    message: messageData
+  //  }
+  //}, function(error, response, body) {
+  //  if (error) {
+  //    console.log('Error sending message: ', error);
+  //  } else if (response.body.error) {
+  //    console.log('Error: ', response.body.error);
+  //  } else {
+  //    console.log('Success: ', response.body);
+  //  }
+  //});
 };
 
 let sendTextMessage = (sender, text) => {
