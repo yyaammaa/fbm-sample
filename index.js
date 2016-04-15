@@ -59,7 +59,7 @@ app.listen(app.get('port'), (err) => {
   console.log('Running on port', app.get('port'));
 });
 
-let getUserInfo = (sender) => {
+const getUserInfo = (sender) => {
   api.getUserProfile(sender, (error, response, body) => {
       if (error) {
       console.log('Error sending message: ', error);
@@ -67,10 +67,8 @@ let getUserInfo = (sender) => {
       console.log('Error: ', response.body.error);
     } else {
       console.log('Success: ', response.body);
-      let mes = JSON.parse(response.body);
+      const mes = JSON.parse(response.body);
       const firstName = mes.first_name || '';
-      console.log(mes.first_name);
-      console.log(mes.last_name);
       sendTextMessage(sender, 'hello, ' + firstName);
     }
   });
