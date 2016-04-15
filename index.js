@@ -12,13 +12,13 @@ app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   console.log('/ get');
-
   res.send('\n 🌍 \n');
 });
 
 app.get('/webhook/', (req, res) => {
   if (req.query['hub.verify_token'] === 'please_verify_me_soon') {
     res.send(req.query['hub.challenge']);
+    return;
   }
   res.send('Error, wrong validation token');
 });
@@ -67,7 +67,6 @@ let sendGenericMessage = (sender) => {
       console.log('Success: ', response.body);
     }
   });
-
 };
 
 let sendTextMessage = (sender, text) => {

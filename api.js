@@ -12,20 +12,23 @@ const TOKEN = config('PAGE_ACCESS_TOKEN');
  * @param notificationType: optional: REGULAR, SILENT_PUSH, NO_PUSH
  * @param callback: optional: aa
  */
-let send = (sender, message, notificationType, callback)=> {
+let send = (sender, message, notificationType, callback) => {
   const type = notificationType || 'SILENT_PUSH';
-  request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token: TOKEN},
-    method: 'POST',
-    json: {
-      recipient: {id: sender},
-      message: message,
-      notification_type: type
+  request(
+    {
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {access_token: TOKEN},
+      method: 'POST',
+      json: {
+        recipient: {id: sender},
+        message: message,
+        notification_type: type
+      }
+    },
+    (error, response, body) => {
+      if (callback) callback(error, response, body);
     }
-  }, function(error, response, body) {
-    if (callback) callback(error, response, body);
-  });
+  );
 };
 
 let api = {
@@ -34,7 +37,7 @@ let api = {
       text: text
     };
 
-    send(sender, messageData, (error, response, body)=> {
+    send(sender, messageData, (error, response, body) => {
       if (callback) callback(error, response, body);
     });
   },
@@ -72,7 +75,7 @@ let api = {
       }
     };
 
-    send(sender, messageData, (error, response, body)=> {
+    send(sender, messageData, (error, response, body) => {
       if (callback) callback(error, response, body);
     });
   }
