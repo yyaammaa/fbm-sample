@@ -12,29 +12,42 @@ const TOKEN = config('PAGE_ACCESS_TOKEN');
  * @param notificationType: optional: REGULAR, SILENT_PUSH, NO_PUSH
  * @param callback: optional: aa
  */
-let send = (sender, message, notificationType, callback)=> {
+let send = (sender, message, notificationType, callback) => {
   const type = notificationType || 'SILENT_PUSH';
   request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token: TOKEN},
+    qs: { access_token: TOKEN },
     method: 'POST',
     json: {
-      recipient: {id: sender},
+      recipient: { id: sender },
       message: message,
       notification_type: type
     }
-  }, function(error, response, body) {
+  }, (error, response, body) => {
     if (callback) callback(error, response, body);
   });
 };
 
 let api = {
+  getUserProfile: (sender, callback) => {
+    request({
+      url: 'https://graph.facebook.com/v2.6/' + sender,
+      qs: {
+        fields: 'first_name, last_name, profile_pic',
+        access_token: TOKEN
+      },
+      method: 'GET'
+    },  (error, response, body) => {
+      if (callback) callback(error, response, body);
+    });
+  },
+
   sendTextMessage: (sender, text, callback) => {
     let messageData = {
       text: text
     };
 
-    send(sender, messageData, (error, response, body)=> {
+    send(sender, messageData, (error, response, body) => {
       if (callback) callback(error, response, body);
     });
   },
@@ -54,25 +67,25 @@ let api = {
               "url": "https://www.messenger.com/",
               "title": "Web url"
             }, {
-              "type": "postback",
-              "title": "Postback",
-              "payload": "Payload for first element in a generic bubble",
-            }],
+                "type": "postback",
+                "title": "Postback",
+                "payload": "Payload for first element in a generic bubble",
+              }],
           }, {
-            "title": "Second card",
-            "subtitle": "Element #2 of an hscroll",
-            "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-            "buttons": [{
-              "type": "postback",
-              "title": "Postback",
-              "payload": "Payload for second element in a generic bubble",
+              "title": "Second card",
+              "subtitle": "Element #2 of an hscroll",
+              "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+              "buttons": [{
+                "type": "postback",
+                "title": "Postback",
+                "payload": "Payload for second element in a generic bubble",
+              }]
             }]
-          }]
         }
       }
     };
 
-    send(sender, messageData, (error, response, body)=> {
+    send(sender, messageData, (error, response, body) => {
       if (callback) callback(error, response, body);
     });
   }

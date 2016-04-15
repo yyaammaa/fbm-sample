@@ -7,7 +7,7 @@ const request = require('request');
 const api = require('./api');
 
 app.set('port', (process.env.PORT || 5000));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
@@ -43,6 +43,8 @@ app.post('/webhook/', (req, res) => {
       console.log('Receive text: text = ' + text + ', sender = ' + sender);
       if (text === 'Generic') {
         sendGenericMessage(sender);
+      } else if (text==='who') {
+        getUserInfo(sender);
       } else {
         sendTextMessage(sender, text);
       }
@@ -57,8 +59,20 @@ app.listen(app.get('port'), (err) => {
   console.log('Running on port', app.get('port'));
 });
 
+let getUserInfo = (sender) => {
+  api.getUserProfile(sender, (error, response, body) => {
+      if (error) {
+      console.log('Error sending message: ', error);
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error);
+    } else {
+      console.log('Success: ', response.body);
+    }
+  });
+};
+
 let sendGenericMessage = (sender) => {
-  api.sendGenericMessage(sender, (error, response, body)=> {
+  api.sendGenericMessage(sender, (error, response, body) => {
     if (error) {
       console.log('Error sending message: ', error);
     } else if (response.body.error) {
@@ -67,11 +81,10 @@ let sendGenericMessage = (sender) => {
       console.log('Success: ', response.body);
     }
   });
-
 };
 
 let sendTextMessage = (sender, text) => {
-  api.sendTextMessage(sender, text, (error, response, body)=> {
+  api.sendTextMessage(sender, text, (error, response, body) => {
     if (error) {
       console.log('Error sending message: ', error);
     } else if (response.body.error) {
