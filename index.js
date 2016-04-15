@@ -67,8 +67,11 @@ let getUserInfo = (sender) => {
       console.log('Error: ', response.body.error);
     } else {
       console.log('Success: ', response.body);
-      const firstName = response.body.first_name || '';
-      sendTextMessage(sender, 'hello, '+firstName);
+      let mes = JSON.parse(response.body);
+      const firstName = mes.first_name || '';
+      console.log(mes.first_name);
+      console.log(mes.last_name);
+      sendTextMessage(sender, 'hello, ' + firstName);
     }
   });
 };
