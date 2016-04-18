@@ -206,12 +206,12 @@ let api = {
     // TODO
     switch (payload) {
       case PAYLOADS.top:
-        this.sendTopMessage(sender);
+        api.sendTopMessage(sender);
         break;
       case PAYLOADS.zandaka:
-        this.sendTextMessage(
+        api.sendTextMessage(
           sender,
-          '現在の残高は 2,837,389円 ですa',
+          '現在の残高は 2,837,389円 です',
           null
         );
         break;
@@ -219,6 +219,7 @@ let api = {
         break;
     }
   }
+
 };
 
 module.exports = api;
