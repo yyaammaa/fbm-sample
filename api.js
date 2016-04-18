@@ -203,11 +203,7 @@ let api = {
       return;
     }
 
-    // TODO
     switch (payload) {
-      case PAYLOADS.top:
-        api.sendTopMessage(sender);
-        break;
       case PAYLOADS.zandaka:
         api.sendTextMessage(
           sender,
@@ -215,7 +211,29 @@ let api = {
           null
         );
         break;
+      case PAYLOADS.meisai:
+      case PAYLOADS.accountEtc:
+      case PAYLOADS.shintaku:
+      case PAYLOADS.teiki:
+      case PAYLOADS.investEtc:
+      case PAYLOADS.setting:
+      case PAYLOADS.etcEtc:
+        api.sendTextMessage(
+          sender,
+          '(未実装です)',
+          null
+        );
+        break;
+      case PAYLOADS.otoku:
+        api.sendTextMessage(
+          sender,
+          'aaaa \n\n http://www.resonabank.co.jp/net/jal/index.html',
+          null
+        );
+        break;
+      case PAYLOADS.top:
       default:
+        api.sendTopMessage(sender);
         break;
     }
   }
