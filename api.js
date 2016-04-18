@@ -211,6 +211,14 @@ let api = {
           null
         );
         break;
+      case PAYLOADS.otoku:
+        api.sendTextMessage(
+          sender,
+          '銀行を使うだけでマイルがたまる。JALスマート口座 Debut! \n\n'
+          + 'http://www.resonabank.co.jp/net/jal/index.html',
+          null
+        );
+        break;
       case PAYLOADS.meisai:
       case PAYLOADS.accountEtc:
       case PAYLOADS.shintaku:
@@ -221,13 +229,6 @@ let api = {
         api.sendTextMessage(
           sender,
           '(未実装です)',
-          null
-        );
-        break;
-      case PAYLOADS.otoku:
-        api.sendTextMessage(
-          sender,
-          'aaaa \n\n http://www.resonabank.co.jp/net/jal/index.html',
           null
         );
         break;
