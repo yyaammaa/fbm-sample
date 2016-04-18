@@ -32,6 +32,19 @@ let send = (sender, message, notificationType, callback) => {
 };
 
 let api = {
+  getUserProfile: (sender, callback) => {
+    request({
+      url: 'https://graph.facebook.com/v2.6/' + sender,
+      qs: {
+        fields: 'first_name, last_name, profile_pic',
+        access_token: TOKEN
+      },
+      method: 'GET'
+    }, (error, response, body) => {
+      if (callback) callback(error, response, body);
+    });
+  },
+
   sendTextMessage: (sender, text, callback) => {
     let messageData = {
       text: text
