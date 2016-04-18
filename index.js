@@ -45,11 +45,14 @@ app.post('/webhook/', (req, res) => {
         sendGenericMessage(sender);
       } else if (text === 'who') {
         getUserInfo(sender);
-      } else if (text === 'top') {
-        sendTopMessage(sender);
       } else {
-        sendTextMessage(sender, text);
+        sendTopMessage(sender);
       }
+      //} else if (text === 'top') {
+      //  sendTopMessage(sender);
+      //} else {
+      //  sendTextMessage(sender, text);
+      //}
     }
   }
   res.sendStatus(200);
