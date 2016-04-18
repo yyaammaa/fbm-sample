@@ -156,4 +156,3 @@ let api = {
 };
 
 module.exports = api;
-module.exports = payloads;
