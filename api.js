@@ -70,10 +70,16 @@ let api = {
                 "type": "web_url",
                 "url": "https://www.messenger.com/",
                 "title": "Web url"
-              }, {
+              },
+              {
                 "type": "postback",
                 "title": "Postback",
                 "payload": "Payload for first element in a generic bubble",
+              },
+              {
+                "type": "postback",
+                "title": "Postback2",
+                "payload": "PAY_LOAD_IS_HERE",
               }
             ]
           }, {
