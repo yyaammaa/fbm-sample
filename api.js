@@ -79,16 +79,6 @@ let api = {
                 "type": "web_url2",
                 "url": "https://www.messenger.com/",
                 "title": "Web url"
-              },
-              {
-                "type": "web_url3",
-                "url": "https://www.messenger.com/",
-                "title": "Web url"
-              },
-              {
-                "type": "web_url4",
-                "url": "https://www.messenger.com/",
-                "title": "Web url"
               }
             ]
           }, {
