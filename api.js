@@ -11,6 +11,9 @@ const payloads = {
   shintaku: 'PAYLOAD_SHINTAKU',
   teiki: 'PAYLOAD_TEIKI',
   investEtc: 'PAYLOAD_INVEST_ETC',
+  otoku: 'PAYLOAD_OTOKU',
+  setting: 'PAYLOAD_SETTING',
+  etcEtc: 'PAYLOAD_ETC_ETC',
 };
 
 const topMesssage = {
@@ -43,7 +46,7 @@ const topMesssage = {
         },
         {
           "title": "預金・投資",
-          "subtitle": "みなさまの大切な資産の運用にお役立ていただけるよう、さまざまな商品をご用意しています。",
+          "subtitle": "資産の運用にお役立ていただけるよう、さまざまな商品をご用意しています。",
           "image_url": "https://cloud.githubusercontent.com/assets/1149883/14593301/ca6f3f68-0563-11e6-9fc0-a6e55e647def.png",
           "buttons": [
             {
@@ -60,6 +63,28 @@ const topMesssage = {
               "type": "postback",
               "title": "その他",
               "payload": payloads.investEtc
+            }
+          ]
+        },
+        {
+          "title": "その他",
+          "subtitle": "キャンペーンやお得な情報など",
+          "image_url": "https://cloud.githubusercontent.com/assets/1149883/14593380/bfe1cb8c-0564-11e6-9e9a-c7199d342502.png",
+          "buttons": [
+            {
+              "type": "postback",
+              "title": "お得な情報",
+              "payload": payloads.otoku
+            },
+            {
+              "type": "postback",
+              "title": "設定",
+              "payload": payloads.setting
+            },
+            {
+              "type": "postback",
+              "title": "その他",
+              "payload": payloads.etcEtc
             }
           ]
         }
