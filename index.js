@@ -7,7 +7,7 @@ const request = require('request');
 const api = require('./api');
 
 app.set('port', (process.env.PORT || 5000));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
@@ -43,8 +43,10 @@ app.post('/webhook/', (req, res) => {
       console.log('Receive text: text = ' + text + ', sender = ' + sender);
       if (text === 'Generic') {
         sendGenericMessage(sender);
-      } else if (text==='who') {
+      } else if (text === 'who') {
         getUserInfo(sender);
+      } else if (text === 'top') {
+        sendTopMessage(sender);
       } else {
         sendTextMessage(sender, text);
       }
@@ -61,7 +63,7 @@ app.listen(app.get('port'), (err) => {
 
 const getUserInfo = (sender) => {
   api.getUserProfile(sender, (error, response, body) => {
-      if (error) {
+    if (error) {
       console.log('Error sending message: ', error);
     } else if (response.body.error) {
       console.log('Error: ', response.body.error);
@@ -70,6 +72,18 @@ const getUserInfo = (sender) => {
       const mes = JSON.parse(response.body);
       const firstName = mes.first_name || '';
       sendTextMessage(sender, 'hello, ' + firstName);
+    }
+  });
+};
+
+let sendTopMessage = (sender) => {
+  api.sendTopMessage(sender, (error, response, body) => {
+    if (error) {
+      console.log('Error sending message: ', error);
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error);
+    } else {
+      console.log('Success: ', response.body);
     }
   });
 };

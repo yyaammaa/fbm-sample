@@ -4,6 +4,52 @@ const config = require('./config');
 const request = require('request');
 const TOKEN = config('PAGE_ACCESS_TOKEN');
 
+const payloads = {
+  zandaka: 'PAYLOAD_ZANDAKA',
+  meisai: 'PAYLOAD_MEISAI',
+  accountEtc: 'PAYLOAD_ACCOUNT_ETC',
+};
+
+const topMesssage = {
+  "attachment": {
+    "type": "template",
+    "payload": {
+      "template_type": "generic",
+      "elements": [{
+        "title": "アカウント",
+        //"subtitle": "Element #1 of an hscroll",
+        "image_url": "https://cloud.githubusercontent.com/assets/1149883/14593174/1473745a-0562-11e6-9335-6a6f492f9a28.png",
+        "buttons": [
+          {
+            "type": "postback",
+            "title": "残高照会",
+            "payload": payloads.zandaka
+          },
+          {
+            "type": "postback",
+            "title": "入出金明細",
+            "payload": payloads.meisai
+          },
+          {
+            "type": "postback",
+            "title": "その他",
+            "payload": payloads.accountEtc
+          }
+        ]
+      }, {
+        "title": "Second card",
+        "subtitle": "Element #2 of an hscroll",
+        "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+        "buttons": [{
+          "type": "postback",
+          "title": "Postback",
+          "payload": "Payload for second element in a generic bubble",
+        }]
+      }]
+    }
+  }
+};
+
 /**
  * row send api
  *
@@ -99,8 +145,15 @@ let api = {
     send(sender, messageData, (error, response, body) => {
       if (callback) callback(error, response, body);
     });
+  },
+
+  sendTopMessage: (sender, callback) => {
+    send(sender, topMesssage, (error, response, body) => {
+      if (callback) callback(error, response, body);
+    });
   }
 
 };
 
 module.exports = api;
+module.exports = payloads;
