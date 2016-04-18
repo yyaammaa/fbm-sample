@@ -8,6 +8,9 @@ const payloads = {
   zandaka: 'PAYLOAD_ZANDAKA',
   meisai: 'PAYLOAD_MEISAI',
   accountEtc: 'PAYLOAD_ACCOUNT_ETC',
+  shintaku: 'PAYLOAD_SHINTAKU',
+  teiki: 'PAYLOAD_TEIKI',
+  investEtc: 'PAYLOAD_INVEST_ETC',
 };
 
 const topMesssage = {
@@ -15,37 +18,52 @@ const topMesssage = {
     "type": "template",
     "payload": {
       "template_type": "generic",
-      "elements": [{
-        "title": "アカウント",
-        //"subtitle": "Element #1 of an hscroll",
-        "image_url": "https://cloud.githubusercontent.com/assets/1149883/14593174/1473745a-0562-11e6-9335-6a6f492f9a28.png",
-        "buttons": [
-          {
-            "type": "postback",
-            "title": "残高照会",
-            "payload": payloads.zandaka
-          },
-          {
-            "type": "postback",
-            "title": "入出金明細",
-            "payload": payloads.meisai
-          },
-          {
-            "type": "postback",
-            "title": "その他",
-            "payload": payloads.accountEtc
-          }
-        ]
-      }, {
-        "title": "Second card",
-        "subtitle": "Element #2 of an hscroll",
-        "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-        "buttons": [{
-          "type": "postback",
-          "title": "Postback",
-          "payload": "Payload for second element in a generic bubble",
-        }]
-      }]
+      "elements": [
+        {
+          "title": "アカウント",
+          "subtitle": "残高照会や入出金明細の確認を行うことが出来ます。",
+          "image_url": "https://cloud.githubusercontent.com/assets/1149883/14593174/1473745a-0562-11e6-9335-6a6f492f9a28.png",
+          "buttons": [
+            {
+              "type": "postback",
+              "title": "残高照会",
+              "payload": payloads.zandaka
+            },
+            {
+              "type": "postback",
+              "title": "入出金明細",
+              "payload": payloads.meisai
+            },
+            {
+              "type": "postback",
+              "title": "その他",
+              "payload": payloads.accountEtc
+            }
+          ]
+        },
+        {
+          "title": "預金・投資",
+          "subtitle": "みなさまの大切な資産の運用にお役立ていただけるよう、さまざまな商品をご用意しています。",
+          "image_url": "https://cloud.githubusercontent.com/assets/1149883/14593301/ca6f3f68-0563-11e6-9fc0-a6e55e647def.png",
+          "buttons": [
+            {
+              "type": "postback",
+              "title": "定期預金",
+              "payload": payloads.teiki
+            },
+            {
+              "type": "postback",
+              "title": "投資信託",
+              "payload": payloads.shintaku
+            },
+            {
+              "type": "postback",
+              "title": "その他",
+              "payload": payloads.investEtc
+            }
+          ]
+        }
+      ]
     }
   }
 };
