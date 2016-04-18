@@ -4,7 +4,8 @@
   "description": "fbm-sample",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jest"
   },
   "dependencies": {
     "body-parser": "^1.15.0",
@@ -24,5 +25,10 @@
     "node",
     "heroku",
     "express"
-  ]
+  ],
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "jest-cli": "^11.0.2",
+    "run-sequence": "^1.1.5"
+  }
 }
