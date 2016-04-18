@@ -218,7 +218,6 @@ let api = {
         break;
     }
   }
-
 };
 
 module.exports = api;
