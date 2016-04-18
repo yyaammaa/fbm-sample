@@ -211,7 +211,8 @@ let api = {
       case PAYLOADS.zandaka:
         this.sendTextMessage(
           sender,
-          '現在の残高は 2,837,389円 ですa'
+          '現在の残高は 2,837,389円 ですa',
+          null
         );
         break;
       default:
