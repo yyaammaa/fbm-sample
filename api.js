@@ -4,7 +4,8 @@ const config = require('./config');
 const request = require('request');
 const TOKEN = config('PAGE_ACCESS_TOKEN');
 
-const payloads = {
+const PAYLOADS = {
+  top: 'PAYLOAD_TOP',
   zandaka: 'PAYLOAD_ZANDAKA',
   meisai: 'PAYLOAD_MEISAI',
   accountEtc: 'PAYLOAD_ACCOUNT_ETC',
@@ -30,17 +31,17 @@ const topMesssage = {
             {
               "type": "postback",
               "title": "残高照会",
-              "payload": payloads.zandaka
+              "payload": PAYLOADS.zandaka
             },
             {
               "type": "postback",
               "title": "入出金明細",
-              "payload": payloads.meisai
+              "payload": PAYLOADS.meisai
             },
             {
               "type": "postback",
               "title": "その他",
-              "payload": payloads.accountEtc
+              "payload": PAYLOADS.accountEtc
             }
           ]
         },
@@ -52,17 +53,17 @@ const topMesssage = {
             {
               "type": "postback",
               "title": "定期預金",
-              "payload": payloads.teiki
+              "payload": PAYLOADS.teiki
             },
             {
               "type": "postback",
               "title": "投資信託",
-              "payload": payloads.shintaku
+              "payload": PAYLOADS.shintaku
             },
             {
               "type": "postback",
               "title": "その他",
-              "payload": payloads.investEtc
+              "payload": PAYLOADS.investEtc
             }
           ]
         },
@@ -74,17 +75,17 @@ const topMesssage = {
             {
               "type": "postback",
               "title": "お得な情報",
-              "payload": payloads.otoku
+              "payload": PAYLOADS.otoku
             },
             {
               "type": "postback",
               "title": "設定",
-              "payload": payloads.setting
+              "payload": PAYLOADS.setting
             },
             {
               "type": "postback",
               "title": "その他",
-              "payload": payloads.etcEtc
+              "payload": PAYLOADS.etcEtc
             }
           ]
         }
@@ -196,7 +197,27 @@ let api = {
     });
   },
 
+  handlePayload: (sender, payload) => {
+    if (!payload) {
+      console.log('invalid payload');
+      return;
+    }
 
+    // TODO
+    switch (payload) {
+      case PAYLOADS.top:
+        this.sendTopMessage(sender);
+        break;
+      case PAYLOADS.zandaka:
+        this.sendTextMessage(
+          sender,
+          '現在の残高は 2,837,389円 ですa'
+        );
+        break;
+      default:
+        break;
+    }
+  }
 
 };
 

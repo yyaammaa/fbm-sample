@@ -32,10 +32,8 @@ app.post('/webhook/', (req, res) => {
     const sender = event.sender.id;
 
     if (event.postback) {
-      const text = JSON.stringify(event.postback);
       const payload = event.postback.payload;
-//      sendTextMessage(sender, "Postback received: " + text.substring(0, 200));
-      sendTextMessage(sender, "Postback received: payload = " + payload);
+      api.handlePayload(sender, payload);
       continue;
     }
 
@@ -50,11 +48,6 @@ app.post('/webhook/', (req, res) => {
       } else {
         sendTopMessage(sender);
       }
-      //} else if (text === 'top') {
-      //  sendTopMessage(sender);
-      //} else {
-      //  sendTextMessage(sender, text);
-      //}
     }
   }
   res.sendStatus(200);
