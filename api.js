@@ -74,11 +74,6 @@ let api = {
                 "type": "postback",
                 "title": "Postback",
                 "payload": "Payload for first element in a generic bubble",
-              },
-              {
-                "type": "web_url2",
-                "url": "https://www.messenger.com/",
-                "title": "Web url"
               }
             ]
           }, {
