@@ -33,7 +33,7 @@ app.post('/webhook/', (req, res) => {
 
     if (event.postback) {
       const text = JSON.stringify(event.postback);
-      const payload = text.payload;
+      const payload = event.postback.payload;
 //      sendTextMessage(sender, "Postback received: " + text.substring(0, 200));
       sendTextMessage(sender, "Postback received: payload = " + payload);
       continue;
