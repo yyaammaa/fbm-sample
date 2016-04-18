@@ -46,7 +46,7 @@ const topMesssage = {
         },
         {
           "title": "預金・投資",
-          "subtitle": "資産の運用にお役立ていただけるよう、さまざまな商品をご用意しています。",
+          "subtitle": "資産の運用にお役立ていただけるさまざまな商品をご用意しています",
           "image_url": "https://cloud.githubusercontent.com/assets/1149883/14593301/ca6f3f68-0563-11e6-9fc0-a6e55e647def.png",
           "buttons": [
             {
