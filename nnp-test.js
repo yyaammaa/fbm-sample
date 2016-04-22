@@ -27,4 +27,4 @@ const _ = require('lodash');
 //  }
 //});
 
-sendGeneric(mockResponse.hits.hits, null);
+//sendGeneric(mockResponse.hits.hits, null);

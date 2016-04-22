@@ -69,8 +69,8 @@ app.post('/webhook/', (req, res) => {
           //} else if (response.body.error) {
           //  console.log('Error: ', response.body.error);
         } else {
-          // const json = JSON.stringify(response.body);
-          // console.log('Success: ', json);
+          const json = JSON.stringify(response.body);
+          console.log('Success: ', json);
 //    console.log('Success: ', response.body);
 
           const hits = body.hits.hits;
@@ -87,7 +87,6 @@ app.post('/webhook/', (req, res) => {
           //  if (!tmp) tmp = title;
           //});
           //sendTextMessage(sender, tmp || '(not found)');
-
 
         }
       });
