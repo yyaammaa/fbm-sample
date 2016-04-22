@@ -58,9 +58,9 @@ const sendGeneric = (sender, hits, callback) => {
     }
   });
 
-  //_.each(elements, e=> {
-  //  console.log(e);
-  //});
+  _.each(elements, e=> {
+    console.log(e);
+  });
 
   const message = {
     "attachment": {
