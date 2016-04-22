@@ -75,7 +75,7 @@ app.post('/webhook/', (req, res) => {
             if (!tmp) tmp = title;
           });
 
-          sendTextMessage(sender, text);
+          sendTextMessage(sender, tmp || '(not found)');
         }
       });
     }
