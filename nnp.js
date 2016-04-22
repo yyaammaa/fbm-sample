@@ -41,19 +41,19 @@ const sendGeneric = (sender, hits, callback) => {
     return {
       "title": src.title.substr(0, 5),
       "subtitle": src.desc.substr(0, 5),
-      "image_url": 'https' + src.image_url,
-      //"buttons": [
-      //  {
-      //    "type": "web_url",
-      //    "url": src.url,
-      //    "title": "記事を見る"
-      //  },
-      //  {
-      //    "type": "postback",
-      //    "title": "似た記事を探す",
-      //    "payload": "Payload for first element in a generic bubble",
-      //  }
-      //]
+      "image_url": 'https:' + src.image_url,
+      "buttons": [
+        {
+          "type": "web_url",
+          "url": src.url,
+          "title": "記事を見る"
+        },
+        {
+          "type": "postback",
+          "title": "似た記事を探す",
+          "payload": "Payload for first element in a generic bubble",
+        }
+      ]
     }
   });
 
