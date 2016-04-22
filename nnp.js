@@ -39,8 +39,8 @@ const sendGeneric = (sender, hits, callback) => {
     const src = hit._source;
 
     return {
-      "title": src.title.substr(0, 20),
-      "subtitle": src.desc.substr(0, 30),
+      "title": src.title.substr(0, 5),
+      "subtitle": src.desc.substr(0, 5),
       "image_url": 'https' + src.image_url,
       "buttons": [
         {
@@ -57,11 +57,11 @@ const sendGeneric = (sender, hits, callback) => {
     }
   });
 
-  _.each(elements, e=> {
-    console.log(e);
-  });
+  //_.each(elements, e=> {
+  //  console.log(e);
+  //});
 
-  const message = {
+  const messageData = {
     "attachment": {
       "type": "template",
       "payload": {
@@ -71,7 +71,12 @@ const sendGeneric = (sender, hits, callback) => {
     }
   };
 
-  send(sender, message, (error, response, body) => {
+  console.log('Message = ' + messageData);
+  const hoge = {
+    text: 'yes'
+  };
+
+  send(sender, hoge, (error, response, body) => {
     if (callback) {
       callback(error, response, body)
     } else {
