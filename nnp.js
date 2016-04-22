@@ -2,16 +2,97 @@
 
 const request = require('request');
 const _ = require('lodash');
+const config = require('./config');
+const TOKEN = config('PAGE_ACCESS_TOKEN');
 
-//const endPoint = 'http://auone-elasticsearch-elb-133615898.ap-northeast-1.elb.amazonaws.com:9200/nanapi/v1/_search/template?timeout=50';
-const endPoint = 'http://52.196.140.65:9200/nanapi/v1/_search/template?timeout=50';
+//const searchEndPoint = 'http://auone-elasticsearch-elb-133615898.ap-northeast-1.elb.amazonaws.com:9200/nanapi/v1/_search/template?timeout=50';
+const searchEndPoint = 'http://52.196.140.65:9200/nanapi/v1/_search/template?timeout=50';
+
+const send = (sender, message, notificationType, callback) => {
+  const type = notificationType || 'SILENT_PUSH';
+  request(
+    {
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {access_token: TOKEN},
+      method: 'POST',
+      json: {
+        recipient: {id: sender},
+        message: message,
+        notification_type: type
+      }
+    },
+    (error, response, body) => {
+      if (callback) callback(error, response, body);
+    }
+  );
+};
+
+/**
+ *
+ * @param sender
+ * @param hits array
+ * @param callback
+ */
+const sendGeneric = (sender, hits, callback) => {
+  // TODO:文字数制限
+
+  const elements = _.map(hits, hit => {
+    const src = hit._source;
+
+    return {
+      "title": src.title,
+      "subtitle": src.desc,
+      "image_url": 'https' + src.image_url,
+      "buttons": [
+        {
+          "type": "web_url",
+          "url": src.url,
+          "title": "記事を見る"
+        },
+        {
+          "type": "postback",
+          "title": "似た記事を探す",
+          "payload": "Payload for first element in a generic bubble",
+        }
+      ]
+    }
+  });
+
+  //_.each(elements, e=> {
+  //  console.log(e);
+  //});
+
+  const message = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": elements
+      }
+    }
+  };
+
+  send(sender, message, (error, response, body) => {
+    if (callback) {
+      callback(error, response, body)
+    } else {
+      if (error) {
+        console.log('Error sending message: ', error);
+      } else if (body.error) {
+        console.log('Error: ', body.error);
+      } else {
+        console.log('Success: ', body);
+      }
+    }
+  });
+};
 
 const search = (query, callback) => {
   const time = Math.floor(new Date().getTime() / 1000);
 
   request(
     {
-      url: endPoint,
+      url: searchEndPoint,
       method: 'POST',
       json: {
         "template": {
@@ -146,5 +227,7 @@ const mockResponse = {
 };
 
 module.exports = {
-  search: search
+  search: search,
+  sendGeneric: sendGeneric,
+  mockResponse: mockResponse
 };

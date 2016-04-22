@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const api = require('./api');
 const nanapiSearch = require('./nnp').search;
+const sendGeneric = require('./nnp').sendGeneric;
 const _ = require('lodash');
 
 app.set('port', (process.env.PORT || 5000));
@@ -72,20 +73,22 @@ app.post('/webhook/', (req, res) => {
           // console.log('Success: ', json);
 //    console.log('Success: ', response.body);
 
-          let tmp = null;
-
           const hits = body.hits.hits;
-          _.each(hits, hit => {
-            const title = hit._source.title;
-            const url = hit._source.url;
-            const imageUrl = hit._source.image_url;
-            const desc = hit._source.desc;
-            console.log(title + ', ' + url + ', ' + imageUrl + ', ' + desc);
+          sendGeneric(sender, hits);
 
-            if (!tmp) tmp = title;
-          });
+          //let tmp = null;
+          //_.each(hits, hit => {
+          //  const title = hit._source.title;
+          //  const url = hit._source.url;
+          //  const imageUrl = hit._source.image_url;
+          //  const desc = hit._source.desc;
+          //  console.log(title + ', ' + url + ', ' + imageUrl + ', ' + desc);
+          //
+          //  if (!tmp) tmp = title;
+          //});
+          //sendTextMessage(sender, tmp || '(not found)');
 
-          sendTextMessage(sender, tmp || '(not found)');
+
         }
       });
     }
