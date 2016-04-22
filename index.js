@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const api = require('./api');
 const nanapiSearch = require('./nnp').search;
+const _ = require('lodash');
 
 app.set('port', (process.env.PORT || 5000));
 app.use(bodyParser.urlencoded({extended: true}));
