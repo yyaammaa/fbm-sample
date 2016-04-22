@@ -34,14 +34,13 @@ const send = (sender, message, notificationType, callback) => {
  * @param callback
  */
 const sendGeneric = (sender, hits, callback) => {
-  // TODO:文字数制限
 
   const elements = _.map(hits, hit => {
     const src = hit._source;
 
     return {
-      "title": src.title,
-      "subtitle": src.desc,
+      "title": src.title.substr(0, 20),
+      "subtitle": src.desc.substr(0, 30),
       "image_url": 'https' + src.image_url,
       "buttons": [
         {
