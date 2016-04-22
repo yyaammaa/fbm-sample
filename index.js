@@ -5,6 +5,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const request = require('request');
 const api = require('./api');
+const nanapiSearch = require('./nnp').search;
 
 app.set('port', (process.env.PORT || 5000));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -41,13 +42,35 @@ app.post('/webhook/', (req, res) => {
       let text = event.message.text;
       // Handle a text message from this sender
       console.log('Receive text: text = ' + text + ', sender = ' + sender);
-      if (text === 'Generic') {
-        sendGenericMessage(sender);
-      } else if (text === 'who') {
-        getUserInfo(sender);
-      } else {
-        sendTopMessage(sender);
-      }
+
+      //if (text === 'Generic') {
+      //  sendGenericMessage(sender);
+      //} else if (text === 'who') {
+      //  getUserInfo(sender);
+      //} else {
+      //  sendTopMessage(sender);
+      //}
+
+      nanapiSearch(text, (error, response, body) => {
+        if (error) {
+          console.log('Error: ', error);
+        } else if (response.body.error) {
+          console.log('Error: ', response.body.error);
+        } else {
+          const json = JSON.stringify(response.body);
+          // console.log('Success: ', json);
+//    console.log('Success: ', response.body);
+
+          const hits = response.body.hits.hits;
+          _.each(hits, hit => {
+            const title = hit._source.title;
+            const url = hit._source.url;
+            const imageUrl = hit._source.image_url;
+            const desc = hit._source.desc;
+            console.log(title + ', ' + url + ', ' + imageUrl + ', ' + desc);
+          });
+        }
+      });
     }
   }
   res.sendStatus(200);
