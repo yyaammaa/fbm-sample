@@ -61,22 +61,61 @@ const sendGeneric = (sender, hits, callback) => {
   //  console.log(e);
   //});
 
+  //const messageData = {
+  //  "attachment": {
+  //    "type": "template",
+  //    "payload": {
+  //      "template_type": "generic",
+  //      "elements": elements
+  //    }
+  //  }
+  //};
   const messageData = {
     "attachment": {
       "type": "template",
       "payload": {
         "template_type": "generic",
-        "elements": elements
+        "elements": [{
+          "title": "First card",
+          "subtitle": "Element #1 of an hscroll",
+          "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+          "buttons": [
+            {
+              "type": "web_url",
+              "url": "https://www.messenger.com/",
+              "title": "Web url"
+            },
+            {
+              "type": "postback",
+              "title": "Postback",
+              "payload": "Payload for first element in a generic bubble",
+            },
+            {
+              "type": "postback",
+              "title": "Postback2",
+              "payload": "PAY_LOAD_IS_HERE",
+            }
+          ]
+        }, {
+          "title": "Second card",
+          "subtitle": "Element #2 of an hscroll",
+          "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+          "buttons": [{
+            "type": "postback",
+            "title": "Postback",
+            "payload": "Payload for second element in a generic bubble",
+          }]
+        }]
       }
     }
   };
 
-  console.log('Message = ' + JSON.stringify(messageData));
-  const hoge = {
-    text: 'yes'
-  };
+  //console.log('Message = ' + JSON.stringify(messageData));
+  //const hoge = {
+  //  text: 'yes'
+  //};
 
-  send(sender, hoge, (error, response, body) => {
+  send(sender, messageData, (error, response, body) => {
     if (callback) {
       callback(error, response, body)
     } else {
