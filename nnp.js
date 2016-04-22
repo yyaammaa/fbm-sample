@@ -71,7 +71,7 @@ const sendGeneric = (sender, hits, callback) => {
     }
   };
 
-  console.log('Message = ' + messageData);
+  console.log('Message = ' + JSON.stringify(messageData));
   const hoge = {
     text: 'yes'
   };
