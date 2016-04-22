@@ -42,18 +42,18 @@ const sendGeneric = (sender, hits, callback) => {
       "title": src.title.substr(0, 5),
       "subtitle": src.desc.substr(0, 5),
       "image_url": 'https' + src.image_url,
-      "buttons": [
-        {
-          "type": "web_url",
-          "url": src.url,
-          "title": "記事を見る"
-        },
-        {
-          "type": "postback",
-          "title": "似た記事を探す",
-          "payload": "Payload for first element in a generic bubble",
-        }
-      ]
+      //"buttons": [
+      //  {
+      //    "type": "web_url",
+      //    "url": src.url,
+      //    "title": "記事を見る"
+      //  },
+      //  {
+      //    "type": "postback",
+      //    "title": "似た記事を探す",
+      //    "payload": "Payload for first element in a generic bubble",
+      //  }
+      //]
     }
   });
 
@@ -61,54 +61,54 @@ const sendGeneric = (sender, hits, callback) => {
   //  console.log(e);
   //});
 
-  //const messageData = {
-  //  "attachment": {
-  //    "type": "template",
-  //    "payload": {
-  //      "template_type": "generic",
-  //      "elements": elements
-  //    }
-  //  }
-  //};
   const messageData = {
     "attachment": {
       "type": "template",
       "payload": {
         "template_type": "generic",
-        "elements": [{
-          "title": "First card",
-          "subtitle": "Element #1 of an hscroll",
-          "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
-          "buttons": [
-            {
-              "type": "web_url",
-              "url": "https://www.messenger.com/",
-              "title": "Web url"
-            },
-            {
-              "type": "postback",
-              "title": "Postback",
-              "payload": "Payload for first element in a generic bubble",
-            },
-            {
-              "type": "postback",
-              "title": "Postback2",
-              "payload": "PAY_LOAD_IS_HERE",
-            }
-          ]
-        }, {
-          "title": "Second card",
-          "subtitle": "Element #2 of an hscroll",
-          "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-          "buttons": [{
-            "type": "postback",
-            "title": "Postback",
-            "payload": "Payload for second element in a generic bubble",
-          }]
-        }]
+        "elements": elements
       }
     }
   };
+  //const messageData = {
+  //  "attachment": {
+  //    "type": "template",
+  //    "payload": {
+  //      "template_type": "generic",
+  //      "elements": [{
+  //        "title": "First card",
+  //        "subtitle": "Element #1 of an hscroll",
+  //        "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+  //        "buttons": [
+  //          {
+  //            "type": "web_url",
+  //            "url": "https://www.messenger.com/",
+  //            "title": "Web url"
+  //          },
+  //          {
+  //            "type": "postback",
+  //            "title": "Postback",
+  //            "payload": "Payload for first element in a generic bubble",
+  //          },
+  //          {
+  //            "type": "postback",
+  //            "title": "Postback2",
+  //            "payload": "PAY_LOAD_IS_HERE",
+  //          }
+  //        ]
+  //      }, {
+  //        "title": "Second card",
+  //        "subtitle": "Element #2 of an hscroll",
+  //        "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+  //        "buttons": [{
+  //          "type": "postback",
+  //          "title": "Postback",
+  //          "payload": "Payload for second element in a generic bubble",
+  //        }]
+  //      }]
+  //    }
+  //  }
+  //};
 
   //console.log('Message = ' + JSON.stringify(messageData));
   //const hoge = {
