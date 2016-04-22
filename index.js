@@ -62,6 +62,8 @@ app.post('/webhook/', (req, res) => {
           // console.log('Success: ', json);
 //    console.log('Success: ', response.body);
 
+          let tmp = null;
+
           const hits = body.hits.hits;
           _.each(hits, hit => {
             const title = hit._source.title;
@@ -69,7 +71,11 @@ app.post('/webhook/', (req, res) => {
             const imageUrl = hit._source.image_url;
             const desc = hit._source.desc;
             console.log(title + ', ' + url + ', ' + imageUrl + ', ' + desc);
+
+            if (!tmp) tmp = title;
           });
+
+          sendTextMessage(sender, text);
         }
       });
     }
