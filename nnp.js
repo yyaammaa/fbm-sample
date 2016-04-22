@@ -25,7 +25,8 @@ const search = (query, callback) => {
       }
     },
     (error, response, body) => {
-      if (callback) callback(error, response, body);
+//      if (callback) callback(error, response, body);
+      if (callback) callback(error, response, mockResponse);
     }
   );
 };
@@ -40,7 +41,7 @@ const search = (query, callback) => {
 //    // console.log('Success: ', json);
 ////    console.log('Success: ', response.body);
 //
-//    const hits = response.body.hits.hits;
+//    const hits = body.hits.hits;
 //    _.each(hits, hit => {
 //      const title = hit._source.title;
 //      const url = hit._source.url;
