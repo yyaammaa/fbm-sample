@@ -2,6 +2,7 @@
 
 const express = require('express');
 const app = express();
+const path = require('path');
 const bodyParser = require('body-parser');
 const request = require('request');
 const api = require('./api');
@@ -9,12 +10,20 @@ const nanapiSearch = require('./nnp').search;
 const _ = require('lodash');
 
 app.set('port', (process.env.PORT || 5000));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   console.log('/ get');
   res.send('\n 🌍 \n');
+});
+
+app.get('/lp', (req, res) => {
+  console.log('/lp get');
+  res.render('lp.jade', {});
 });
 
 app.get('/webhook/', (req, res) => {
@@ -28,6 +37,7 @@ app.get('/webhook/', (req, res) => {
 app.post('/webhook/', (req, res) => {
   console.log(req.body);
 
+  // TODO: 0以外もちゃんと処理する
   let messaging_events = req.body.entry[0].messaging;
   for (let i = 0; i < messaging_events.length; i++) {
     const event = req.body.entry[0].messaging[i];

@@ -1,0 +1,31 @@
+extends ./base.jade
+
+block content
+    h3 press the button
+    div(class='fb-messengermessageus')&attributes({
+        messenger_app_id: "1180782961945970",
+        page_id: "769264376539463",
+        color: "blue",
+        size: "xlarge"
+    })
+    script(type='text/javascript').
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: '1180782961945970',
+                xfbml: true,
+                version: 'v2.6'
+            });
+
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
