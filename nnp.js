@@ -39,8 +39,8 @@ const sendGeneric = (sender, hits, callback) => {
     const src = hit._source;
 
     return {
-      "title": src.title.substr(0, 10),
-      "subtitle": src.desc.substr(0, 20),
+      "title": src.title.substr(0, 20),
+      "subtitle": src.desc.substr(0, 38),
       "image_url": 'https:' + src.image_url,
       "buttons": [
         {
