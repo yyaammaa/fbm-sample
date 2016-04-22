@@ -54,8 +54,8 @@ app.post('/webhook/', (req, res) => {
       nanapiSearch(text, (error, response, body) => {
         if (error) {
           console.log('Error: ', error);
-        } else if (response.body.error) {
-          console.log('Error: ', response.body.error);
+          //} else if (response.body.error) {
+          //  console.log('Error: ', response.body.error);
         } else {
           // const json = JSON.stringify(response.body);
           // console.log('Success: ', json);
