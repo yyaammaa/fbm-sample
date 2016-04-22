@@ -6,29 +6,32 @@ const _ = require('lodash');
 const endPoint = 'http://auone-elasticsearch-elb-133615898.ap-northeast-1.elb.amazonaws.com:9200/nanapi/v1/_search/template?timeout=50';
 
 const search = (query, callback) => {
-  const time = Math.floor(new Date().getTime() / 1000);
+  //const time = Math.floor(new Date().getTime() / 1000);
+  //
+  //request(
+  //  {
+  //    url: endPoint,
+  //    method: 'POST',
+  //    json: {
+  //      "template": {
+  //        "file": "nanapiDDTempl"
+  //      },
+  //      "params": {
+  //        "query": query,
+  //        "from": 0,
+  //        "size": 3,
+  //        "time": time
+  //      }
+  //    }
+  //  },
+  //  (error, response, body) => {
+  //    if (callback) callback(error, response, body);
+  //  }
+  //);
+  //
+  //
 
-  request(
-    {
-      url: endPoint,
-      method: 'POST',
-      json: {
-        "template": {
-          "file": "nanapiDDTempl"
-        },
-        "params": {
-          "query": query,
-          "from": 0,
-          "size": 3,
-          "time": time
-        }
-      }
-    },
-    (error, response, body) => {
-//      if (callback) callback(error, response, body);
-      if (callback) callback(error, response, mockResponse);
-    }
-  );
+  callback(null, '', mockResponse);
 };
 
 //search('オリンピック', (error, response, body) => {

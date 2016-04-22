@@ -57,11 +57,11 @@ app.post('/webhook/', (req, res) => {
         } else if (response.body.error) {
           console.log('Error: ', response.body.error);
         } else {
-          const json = JSON.stringify(response.body);
+          // const json = JSON.stringify(response.body);
           // console.log('Success: ', json);
 //    console.log('Success: ', response.body);
 
-          const hits = response.body.hits.hits;
+          const hits = body.hits.hits;
           _.each(hits, hit => {
             const title = hit._source.title;
             const url = hit._source.url;
