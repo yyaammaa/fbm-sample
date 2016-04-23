@@ -8,6 +8,7 @@ const request = require('request');
 const api = require('./api');
 const nanapiSearch = require('./nnp').search;
 const sendGeneric = require('./nnp').sendGeneric;
+const sendText = require('./nnp').sendText;
 const _ = require('lodash');
 
 app.set('port', (process.env.PORT || 5000));
@@ -65,12 +66,14 @@ app.post('/webhook/', (req, res) => {
 
           const hits = body.hits.hits;
           sendGeneric(sender, hits);
-
         }
       });
+    } else if (event.message && !event.message.text) {
+      // text以外がきたとき (ステッカーとか位置情報とか画像とか)
+      console.log('Receive non-text: ' + JSON.stringify(event.message) + '\nsender = ' + sender);
+      sendText(sender, 'Oops!!');
     }
   }
-  //res.sendStatus(200);
 });
 
 app.listen(app.get('port'), (err) => {
@@ -78,30 +81,3 @@ app.listen(app.get('port'), (err) => {
 
   console.log('Running on port', app.get('port'));
 });
-
-const getUserInfo = (sender) => {
-  api.getUserProfile(sender, (error, response, body) => {
-    if (error) {
-      console.log('Error sending message: ', error);
-    } else if (response.body.error) {
-      console.log('Error: ', response.body.error);
-    } else {
-      console.log('Success: ', response.body);
-      const mes = JSON.parse(response.body);
-      const firstName = mes.first_name || '';
-      sendTextMessage(sender, 'hello, ' + firstName);
-    }
-  });
-};
-
-const sendTextMessage = (sender, text) => {
-  api.sendTextMessage(sender, text, (error, response, body) => {
-    if (error) {
-      console.log('Error sending message: ', error);
-    } else if (response.body.error) {
-      console.log('Error: ', response.body.error);
-    } else {
-      console.log('Success: ', response.body);
-    }
-  });
-};

@@ -56,9 +56,32 @@ const send = (sender, message, notificationType, callback) => {
       }
     },
     (error, response, body) => {
-      if (callback) callback(error, response, body);
+      if (callback) {
+        callback(error, response, body)
+      } else {
+        if (error) {
+          console.log('Error sending message: ', error);
+        } else if (body.error) {
+          console.log('Error: ', body.error);
+        } else {
+          console.log('Success: ', body);
+        }
+      }
     }
   );
+};
+
+/**
+ *
+ * @param sender
+ * @param text
+ * @param callback optional
+ */
+const sendText = (sender, text, callback) => {
+  const message = {
+    text: text
+  };
+  send(sender, message, callback);
 };
 
 /**
@@ -105,64 +128,8 @@ const sendGeneric = (sender, hits, callback) => {
       }
     }
   };
-  //const messageData = {
-  //  "attachment": {
-  //    "type": "template",
-  //    "payload": {
-  //      "template_type": "generic",
-  //      "elements": [{
-  //        "title": "First card",
-  //        "subtitle": "Element #1 of an hscroll",
-  //        "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
-  //        "buttons": [
-  //          {
-  //            "type": "web_url",
-  //            "url": "https://www.messenger.com/",
-  //            "title": "Web url"
-  //          },
-  //          {
-  //            "type": "postback",
-  //            "title": "Postback",
-  //            "payload": "Payload for first element in a generic bubble",
-  //          },
-  //          {
-  //            "type": "postback",
-  //            "title": "Postback2",
-  //            "payload": "PAY_LOAD_IS_HERE",
-  //          }
-  //        ]
-  //      }, {
-  //        "title": "Second card",
-  //        "subtitle": "Element #2 of an hscroll",
-  //        "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-  //        "buttons": [{
-  //          "type": "postback",
-  //          "title": "Postback",
-  //          "payload": "Payload for second element in a generic bubble",
-  //        }]
-  //      }]
-  //    }
-  //  }
-  //};
 
-  //console.log('Message = ' + JSON.stringify(messageData));
-  //const hoge = {
-  //  text: 'yes'
-  //};
-
-  send(sender, messageData, (error, response, body) => {
-    if (callback) {
-      callback(error, response, body)
-    } else {
-      if (error) {
-        console.log('Error sending message: ', error);
-      } else if (body.error) {
-        console.log('Error: ', body.error);
-      } else {
-        console.log('Success: ', body);
-      }
-    }
-  });
+  send(sender, messageData, callback);
 };
 
 const search = (query, callback) => {
@@ -306,7 +273,9 @@ const mockResponse = {
 
 module.exports = {
   search: search,
+  sendText: sendText,
   sendGeneric: sendGeneric,
   mockResponse: mockResponse,
   setWelcomeMessage: setWelcomeMessage
-};
+}
+;
