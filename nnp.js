@@ -180,6 +180,8 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
     }
   });
 
+  console.log('offset = ' + offset + ', total = ' + total);
+
   // next page
   if (SEARCH_SIZE + offset < total) {
     elements.push({
