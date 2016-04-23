@@ -14,6 +14,7 @@ const SEARCH_ENDPOINT = 'http://52.196.140.65:9200/nanapi/v1/_search/template?ti
 const PAYLOAD = {
   search: 'SEARCH'
 };
+const SEARCH_SIZE = 5;
 
 /**
  * https://developers.facebook.com/docs/messenger-platform/send-api-reference#welcome_message_configuration
@@ -142,7 +143,7 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
 
   sendText(sender, query + " に関する記事です。");
 
-  const elements = _.map(hits, hit => {
+  let elements = _.map(hits, hit => {
     const src = hit._source;
 
     let buttons = [
@@ -179,6 +180,19 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
     }
   });
 
+  // next page
+  if (SEARCH_SIZE + offset < total) {
+    elements.push({
+      "title": 'その他',//TODO:文言
+      "image_url": 'https://asset.cdnanapi.com/assets/common/gu/logo-header-a4fbf480e8bffe9c5096f46ce5b1584a.png',
+      "buttons": [{
+        "type": "postback",
+        "title": 'もっと見る',
+        "payload": PAYLOAD.search + '?query=' + query + '&offset=' + offset
+      }]
+    });
+  }
+
   const messageData = {
     "attachment": {
       "type": "template",
@@ -213,7 +227,7 @@ const search = (query, offset, callback) => {
         "params": {
           "query": query,
           "from": from,
-          "size": 5,
+          "size": SEARCH_SIZE,
           "time": time
         }
       }
