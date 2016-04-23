@@ -134,7 +134,6 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
   const hits = hitsRoot.hits;
   const total = hitsRoot.total;
 
-  // TODO: もうちょっとケアしてあげないと
   if (hits.length === 0) {
     const message = query + " に該当する記事は見つかりませんでした...\n\n他のキーワードを入力してみてください";
     sendText(sender, message);
@@ -148,8 +147,18 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
           "buttons": [
             {
               "type": "postback",
-              "title": "猫 に関する記事",
+              "title": "猫 に関する記事を探す",
               "payload": PAYLOAD.search + '?query=猫'
+            },
+            {
+              "type": "postback",
+              "title": "犬 に関する記事を探す",
+              "payload": PAYLOAD.search + '?query=犬'
+            },
+            {
+              "type": "postback",
+              "title": "羊 に関する記事を探す",
+              "payload": PAYLOAD.search + '?query=羊'
             }
           ]
         }
