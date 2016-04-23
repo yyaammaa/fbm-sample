@@ -183,18 +183,18 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
   console.log('offset = ' + offset + ', total = ' + total);
 
   console.log(
-    'SEARCH_SIZE isNAN = ' + isNaN(SEARCH_SIZE) + '\n' +
-    'offset isNAN = ' + isNaN(offset) + '\n' +
-    'total isNAN = ' + isNaN(total) + '\n' +
-    'SEARCH_SIZE+offset isNAN = ' + isNaN(SEARCH_SIZE + offset) + '\n'
+    'SEARCH_SIZE  = ' + typeof SEARCH_SIZE + '\n' +
+    'offset  = ' + typeof offset + '\n' +
+    'total  = ' + typeof total + '\n' +
+    'SEARCH_SIZE+offset  = ' + typeof (SEARCH_SIZE + offset) + '\n'
   );
 
   // next page
   // TODO: うーん...
   if (parseInt(SEARCH_SIZE) + parseInt(offset) < parseInt(total)) {
-    // const nextOffset = parseInt(SEARCH_SIZE) + parseInt(offset);
-    const nextOffset = SEARCH_SIZE + offset;
-    console.log('next offset isNAN = ' + isNaN(nextOffset));
+    const nextOffset = parseInt(SEARCH_SIZE) + parseInt(offset);
+    //const nextOffset = SEARCH_SIZE + offset;
+    //console.log('next offset isNAN = ' + isNaN(nextOffset));
     console.log('next offset = ' + nextOffset);
     elements.push({
       "title": '検索結果',
