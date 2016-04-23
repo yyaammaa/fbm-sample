@@ -38,9 +38,9 @@ app.get('/webhook/', (req, res) => {
 app.post('/webhook/', (req, res) => {
   console.log(JSON.stringify(req.body));
 
-  // TODO: 0以外もちゃんと処理する
-  let messaging_events = req.body.entry[0].messaging;
-  for (let i = 0; i < messaging_events.length; i++) {
+  // TODO: entry[0]以外も処理する必要がある?
+  const messagingEvents = req.body.entry[0].messaging;
+  for (let i = 0; i < messagingEvents.length; i++) {
     const event = req.body.entry[0].messaging[i];
     const sender = event.sender.id;
 

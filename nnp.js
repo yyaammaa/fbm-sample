@@ -42,6 +42,7 @@ const sendGeneric = (sender, hits, callback) => {
       "title": src.title.substr(0, 20),
       "subtitle": src.desc.substr(0, 38),
       "image_url": 'https:' + src.image_url,
+      "item_url": src.url,
       "buttons": [
         {
           "type": "web_url",
