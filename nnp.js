@@ -7,8 +7,8 @@ const config = require('./config');
 const TOKEN = config('PAGE_ACCESS_TOKEN');
 const PAGE_ID = config('PAGE_ID');
 
-//const searchEndPoint = 'http://auone-elasticsearch-elb-133615898.ap-northeast-1.elb.amazonaws.com:9200/nanapi/v1/_search/template?timeout=50';
-const searchEndPoint = 'http://52.196.140.65:9200/nanapi/v1/_search/template?timeout=50';
+//const SEARCH_ENDPOINT = 'http://auone-elasticsearch-elb-133615898.ap-northeast-1.elb.amazonaws.com:9200/nanapi/v1/_search/template?timeout=50';
+const SEARCH_ENDPOINT = 'http://52.196.140.65:9200/nanapi/v1/_search/template?timeout=50';
 
 /**
  * https://developers.facebook.com/docs/messenger-platform/send-api-reference#welcome_message_configuration
@@ -151,7 +151,7 @@ const search = (query, callback) => {
 
   request(
     {
-      url: searchEndPoint,
+      url: SEARCH_ENDPOINT,
       method: 'POST',
       json: {
         "template": {
