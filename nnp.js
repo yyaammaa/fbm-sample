@@ -138,6 +138,25 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
   if (hits.length === 0) {
     const message = query + " に該当する記事は見つかりませんでした...\n\n他のキーワードを入力してみてください";
     sendText(sender, message);
+
+    const suggestion = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "button",
+          "text": "例えば…",
+          "buttons": [
+            {
+              "type": "postback",
+              "title": "猫 に関する記事",
+              "payload": PAYLOAD.search + '?query=猫'
+            }
+          ]
+        }
+      }
+    };
+    rawSend(sender, suggestion);
+
     return;
   }
 
@@ -152,12 +171,6 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
         "url": src.url,
         "title": "記事を見る"
       }
-      //,
-      //{
-      //  "type": "postback",
-      //  "title": "似た記事を探す",
-      //  "payload": PAYLOAD.findSimilar
-      //}
     ];
 
     const categories = src.cate_path;
