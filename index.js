@@ -54,9 +54,17 @@ app.post('/webhook/', (req, res) => {
       continue;
     }
 
+    // TODO: イースターエッグを増やす
+
     if (event.message.text) {
       let text = event.message.text;
       console.log('Receive text: text = ' + text + ', sender = ' + sender);
+
+      if (text === 'whoami') {
+        const m = 'heroku run bash\nRunning bash on fbm-sample... up, run.1428\n~ $ whoami\nu23298\n';
+        nnp.sendText(sender, m);
+        return;
+      }
 
       nnp.search(text, (error, response, body) => {
         if (error) {
@@ -73,8 +81,6 @@ app.post('/webhook/', (req, res) => {
     } else {
       // text以外がきたとき (ステッカーとか位置情報とか画像とか)
       console.log('Receive non-text: ' + JSON.stringify(event.message) + '\nsender = ' + sender);
-
-      // TODO: イースターエッグを増やす
 
       // いいね！が送られてきたとき
       const stickerId = event.message.sticker_id || 0;
