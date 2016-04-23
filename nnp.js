@@ -2,6 +2,7 @@
 
 const request = require('request');
 const _ = require('lodash');
+const truncate = require('truncate');
 const config = require('./config');
 const TOKEN = config('PAGE_ACCESS_TOKEN');
 const PAGE_ID = config('PAGE_ID');
@@ -111,8 +112,10 @@ const sendSearchResult = (sender, query, hits, callback) => {
     const src = hit._source;
 
     return {
-      "title": src.title.substr(0, 20),
-      "subtitle": src.desc.substr(0, 38),
+      //"title": src.title.substr(0, 20),
+      //"subtitle": src.desc.substr(0, 38),
+      "title": truncate(src.title, 20),
+      "subtitle": truncate(src.desc, 38),
       "image_url": 'https:' + src.image_url,
       "item_url": src.url,
       "buttons": [

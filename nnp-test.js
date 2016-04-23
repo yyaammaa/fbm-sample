@@ -5,8 +5,11 @@ const sendGeneric = require('./nnp').sendSearchResult;
 const mockResponse = require('./nnp').mockResponse;
 const setWelcomeMessage = require('./nnp').setWelcomeMessage;
 const _ = require('lodash');
+const truncate = require('truncate');
 
-setWelcomeMessage();
+console.log(truncate('あいうえお', 3)); // あいう…
+
+//setWelcomeMessage();
 
 //nanapiSearch('犬', (error, response, body) => {
 //  if (error) {

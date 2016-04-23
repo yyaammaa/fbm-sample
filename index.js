@@ -75,9 +75,9 @@ app.post('/webhook/', (req, res) => {
       console.log('Receive non-text: ' + JSON.stringify(event.message) + '\nsender = ' + sender);
 
       // TODO: イースターエッグを増やす
-      const stickerId = event.message.sticker_id || 0;
 
       // いいね！が送られてきたとき
+      const stickerId = event.message.sticker_id || 0;
       if (stickerId === 369239263222822) {
         nnp.sendText(sender, 'Yay!');
         return;
