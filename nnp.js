@@ -185,6 +185,7 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
   // next page
   if (SEARCH_SIZE + offset < total) {
     const nextOffset = SEARCH_SIZE + offset;
+    console.log('next offset = ' + nextOffset);
     elements.push({
       "title": '検索結果',
       "subtitle": truncate(query, 10) + ' に関する記事が' + total + '件あります',
