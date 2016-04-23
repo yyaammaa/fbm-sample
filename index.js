@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const api = require('./api');
 const nanapiSearch = require('./nnp').search;
-const sendGeneric = require('./nnp').sendGeneric;
+const sendSearchResult = require('./nnp').sendSearchResult;
 const sendText = require('./nnp').sendText;
 const _ = require('lodash');
 
@@ -65,13 +65,13 @@ app.post('/webhook/', (req, res) => {
           console.log('Success: ', JSON.stringify(response.body));
 
           const hits = body.hits.hits;
-          sendGeneric(sender, hits);
+          sendSearchResult(sender, hits);
         }
       });
     } else if (event.message && !event.message.text) {
       // text以外がきたとき (ステッカーとか位置情報とか画像とか)
       console.log('Receive non-text: ' + JSON.stringify(event.message) + '\nsender = ' + sender);
-      sendText(sender, 'Oops!!');
+      sendText(sender, 'テキスト以外の入力はいまのところできません。\n\nテキストで何か入力してみてください！');
     }
   }
 });

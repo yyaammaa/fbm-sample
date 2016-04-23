@@ -1,7 +1,7 @@
 'use strict';
 
 const nanapiSearch = require('./nnp').search;
-const sendGeneric = require('./nnp').sendGeneric;
+const sendGeneric = require('./nnp').sendSearchResult;
 const mockResponse = require('./nnp').mockResponse;
 const setWelcomeMessage = require('./nnp').setWelcomeMessage;
 const _ = require('lodash');
@@ -30,4 +30,4 @@ setWelcomeMessage();
 //  }
 //});
 
-//sendGeneric(mockResponse.hits.hits, null);
+//sendSearchResult(mockResponse.hits.hits, null);

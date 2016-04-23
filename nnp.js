@@ -42,7 +42,7 @@ const setWelcomeMessage = () => {
   );
 };
 
-const send = (sender, message, notificationType, callback) => {
+const rawSend = (sender, message, notificationType, callback) => {
   const type = notificationType || 'SILENT_PUSH';
   request(
     {
@@ -81,7 +81,7 @@ const sendText = (sender, text, callback) => {
   const message = {
     text: text
   };
-  send(sender, message, callback);
+  rawSend(sender, message, callback);
 };
 
 /**
@@ -90,7 +90,11 @@ const sendText = (sender, text, callback) => {
  * @param hits array
  * @param callback
  */
-const sendGeneric = (sender, hits, callback) => {
+const sendSearchResult = (sender, hits, callback) => {
+  if (hits.length === 0) {
+    sendText(sender, '見つかりませんでした...\n他のキーワードを入力してみてください');
+    return;
+  }
 
   const elements = _.map(hits, hit => {
     const src = hit._source;
@@ -115,10 +119,6 @@ const sendGeneric = (sender, hits, callback) => {
     }
   });
 
-  //_.each(elements, e=> {
-  //  console.log(e);
-  //});
-
   const messageData = {
     "attachment": {
       "type": "template",
@@ -129,7 +129,7 @@ const sendGeneric = (sender, hits, callback) => {
     }
   };
 
-  send(sender, messageData, callback);
+  rawSend(sender, messageData, callback);
 };
 
 const search = (query, callback) => {
@@ -274,7 +274,7 @@ const mockResponse = {
 module.exports = {
   search: search,
   sendText: sendText,
-  sendGeneric: sendGeneric,
+  sendSearchResult: sendSearchResult,
   mockResponse: mockResponse,
   setWelcomeMessage: setWelcomeMessage
 }
