@@ -66,6 +66,15 @@ app.post('/webhook/', (req, res) => {
         return;
       }
 
+      if (text === 'kill') {
+        nnp.sendText(sender, 'マジで？');
+        return;
+      }
+
+      if (text === 'supership') {
+        text = '寿司';
+      }
+
       nnp.search(text, (error, response, body) => {
         if (error) {
           console.log('Error: ', error);
