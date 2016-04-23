@@ -85,7 +85,6 @@ const handlePayload = (sender, payload) => {
     const qs = queryParser.parse(payload.substr(search.length));
     if (qs.query) {
       const offsetString = qs.offset || '0';
-
       handleSearch(sender, qs.query, parseInt(offsetString));
     } else {
       console.log('handlePayload: Error: no query');
@@ -183,19 +182,9 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
 
   console.log('offset = ' + offset + ', total = ' + total);
 
-  console.log(
-    'SEARCH_SIZE  = ' + typeof SEARCH_SIZE + '\n' +
-    'offset  = ' + typeof offset + '\n' +
-    'total  = ' + typeof total + '\n' +
-    'SEARCH_SIZE+offset  = ' + typeof (SEARCH_SIZE + offset) + '\n'
-  );
-
   // next page
   if (SEARCH_SIZE + offset < total) {
-    // TODO: うーん...
-    //const nextOffset = parseInt(SEARCH_SIZE) + parseInt(offset);
     const nextOffset = SEARCH_SIZE + offset;
-    console.log('next offset = ' + typeof nextOffset);
     console.log('next offset = ' + nextOffset);
     elements.push({
       "title": '検索結果',
