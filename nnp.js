@@ -10,6 +10,11 @@ const PAGE_ID = config('PAGE_ID');
 //const SEARCH_ENDPOINT = 'http://auone-elasticsearch-elb-133615898.ap-northeast-1.elb.amazonaws.com:9200/nanapi/v1/_search/template?timeout=50';
 const SEARCH_ENDPOINT = 'http://52.196.140.65:9200/nanapi/v1/_search/template?timeout=50';
 
+const PAYLOAD = {
+  search: 'SEARCH',
+  findSimilar: 'SIMILAR'
+};
+
 /**
  * https://developers.facebook.com/docs/messenger-platform/send-api-reference#welcome_message_configuration
  */
@@ -74,6 +79,7 @@ const rawSend = (sender, message, notificationType, callback) => {
 
 // TODO: ちゃんと処理する
 const handlePayload = (sender, payload) => {
+  console.log('payload = ' + payload);
   sendText(sender, 'その機能、まだ無いんですよね… 私も欲しいです。');
 };
 
@@ -135,17 +141,18 @@ const sendSearchResult = (sender, query, hits, callback) => {
       {
         "type": "postback",
         "title": "似た記事を探す",
-        "payload": "Payload for first element in a generic bubble"
+        "payload": PAYLOAD.findSimilar
       }
     ];
 
     const categories = src.cate_path;
     if (categories && categories.length > 0) {
-      const title = categories[categories.length - 1] + 'の記事を探す';
+      const cate = categories[categories.length - 1];
+      const title = cate + 'の記事を探す';
       buttons.push({
         "type": "postback",
         "title": title,
-        "payload": "Payload for first element in a generic bubble"
+        "payload": PAYLOAD.search + '?query=' + cate
       });
     }
 
