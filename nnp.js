@@ -184,13 +184,14 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
 
   // next page
   if (SEARCH_SIZE + offset < total) {
+    const nextOffset = SEARCH_SIZE + offset;
     elements.push({
       "title": 'その他',//TODO:文言
       "image_url": 'https://asset.cdnanapi.com/assets/common/gu/logo-header-a4fbf480e8bffe9c5096f46ce5b1584a.png',
       "buttons": [{
         "type": "postback",
         "title": 'もっと見る',
-        "payload": PAYLOAD.search + '?query=' + query + '&offset=' + offset
+        "payload": PAYLOAD.search + '?query=' + query + '&offset=' + nextOffset
       }]
     });
   }
