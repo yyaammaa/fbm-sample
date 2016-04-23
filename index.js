@@ -75,18 +75,7 @@ app.post('/webhook/', (req, res) => {
         text = '寿司';
       }
 
-      nnp.search(text, (error, response, body) => {
-        if (error) {
-          console.log('Error: ', error);
-          //} else if (response.body.error) {
-          //  console.log('Error: ', response.body.error);
-        } else {
-          console.log('Success: ', JSON.stringify(response.body));
-
-          const hits = body.hits.hits;
-          nnp.sendSearchResult(sender, text, hits);
-        }
-      });
+      nnp.handleSearch(sender,text);
     } else {
       // text以外がきたとき (ステッカーとか位置情報とか画像とか)
       console.log('Receive non-text: ' + JSON.stringify(event.message) + '\nsender = ' + sender);

@@ -77,6 +77,21 @@ const handlePayload = (sender, payload) => {
   sendText(sender, 'その機能、まだ無いんですよね… 私も欲しいです。');
 };
 
+const handleSearch = (sender, query) => {
+  search(query, (error, response, body) => {
+    if (error) {
+      console.log('Search Error: ', error);
+    } else if (body.error) {
+      console.log('Search Error: ', body.error);
+    } else {
+      console.log('Search Success: ', JSON.stringify(response.body));
+
+      const hits = body.hits.hits;
+      sendSearchResult(sender, query, hits);
+    }
+  });
+};
+
 /**
  *
  * @param sender
@@ -297,6 +312,7 @@ const mockResponse = {
 
 module.exports = {
   search: search,
+  handleSearch: handleSearch,
   sendText: sendText,
   handlePayload: handlePayload,
   sendSearchResult: sendSearchResult,
