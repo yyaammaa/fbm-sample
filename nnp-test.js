@@ -7,7 +7,7 @@ const setWelcomeMessage = require('./nnp').setWelcomeMessage;
 const _ = require('lodash');
 const truncate = require('truncate');
 
-console.log(truncate('あいうえお', 3)); // あいう…
+console.log(truncate('あいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえお', 20));
 
 //setWelcomeMessage();
 

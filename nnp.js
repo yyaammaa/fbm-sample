@@ -114,8 +114,8 @@ const sendSearchResult = (sender, query, hits, callback) => {
     return {
       //"title": src.title.substr(0, 20),
       //"subtitle": src.desc.substr(0, 38),
-      "title": truncate(src.title, 20),
-      "subtitle": truncate(src.desc, 38),
+      "title": truncate(src.title, 15),
+      "subtitle": truncate(src.desc, 5),
       "image_url": 'https:' + src.image_url,
       "item_url": src.url,
       "buttons": [
