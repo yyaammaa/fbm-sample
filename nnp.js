@@ -190,11 +190,11 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
   );
 
   // next page
-  // TODO: うーん...
-  if (parseInt(SEARCH_SIZE) + parseInt(offset) < parseInt(total)) {
-    const nextOffset = parseInt(SEARCH_SIZE) + parseInt(offset);
-    //const nextOffset = SEARCH_SIZE + offset;
-    //console.log('next offset isNAN = ' + isNaN(nextOffset));
+  if (SEARCH_SIZE + offset < total) {
+    // TODO: うーん...
+    //const nextOffset = parseInt(SEARCH_SIZE) + parseInt(offset);
+    const nextOffset = SEARCH_SIZE + offset;
+    console.log('next offset = ' + typeof nextOffset);
     console.log('next offset = ' + nextOffset);
     elements.push({
       "title": '検索結果',
