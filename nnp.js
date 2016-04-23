@@ -126,7 +126,7 @@ const sendSearchResult = (sender, query, hits, callback) => {
 
     const categories = src.cate_path;
     if (categories && categories.length > 0) {
-      const title = categories[0] + 'の記事を探す';
+      const title = categories[categories.length - 1] + 'の記事を探す';
       buttons.push({
         "type": "postback",
         "title": title,
