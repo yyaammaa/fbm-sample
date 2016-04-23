@@ -182,6 +182,12 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
 
   console.log('offset = ' + offset + ', total = ' + total);
 
+  console.log(
+    'SEARCH_SIZE isNAN = ' + isNaN(SEARCH_SIZE) + '\n' +
+    'offset isNAN = ' + isNaN(offset) + '\n' +
+    'total isNAN = ' + isNaN(total) + '\n'
+  );
+
   // next page
   // TODO: うーん...
   if (parseInt(SEARCH_SIZE) + parseInt(offset) < parseInt(total)) {
