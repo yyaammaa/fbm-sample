@@ -186,8 +186,9 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
   if (SEARCH_SIZE + offset < total) {
     const nextOffset = SEARCH_SIZE + offset;
     elements.push({
-      "title": 'その他',//TODO:文言
-      "image_url": 'https://asset.cdnanapi.com/assets/common/gu/logo-header-a4fbf480e8bffe9c5096f46ce5b1584a.png',
+      "title": '検索結果',
+      "subtitle": truncate(query, 10) + ' に関する記事が' + total + '件あります',
+      "image_url": 'https://cloud.githubusercontent.com/assets/1149883/14759442/9b1e9624-095e-11e6-9a07-26780b8cfd50.png',
       "buttons": [{
         "type": "postback",
         "title": 'もっと見る',
