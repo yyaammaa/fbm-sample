@@ -12,8 +12,7 @@ const PAGE_ID = config('PAGE_ID');
 const SEARCH_ENDPOINT = 'http://52.196.140.65:9200/nanapi/v1/_search/template?timeout=50';
 
 const PAYLOAD = {
-  search: 'SEARCH',
-  findSimilar: 'SIMILAR'
+  search: 'SEARCH'
 };
 
 /**
@@ -84,7 +83,8 @@ const handlePayload = (sender, payload) => {
   if (payload.includes(search)) {
     const qs = queryParser.parse(payload.substr(search.length));
     if (qs.query) {
-      handleSearch(sender, qs.query);
+      const offset = qs.offset || 0;
+      handleSearch(sender, qs.query, offset);
     } else {
       console.log('handlePayload: Error: no query');
     }
@@ -94,17 +94,16 @@ const handlePayload = (sender, payload) => {
   }
 };
 
-const handleSearch = (sender, query) => {
-  search(query, 0, (error, response, body) => {
+const handleSearch = (sender, query, offset) => {
+  const from = offset || 0;
+  search(query, from, (error, response, body) => {
     if (error) {
       console.log('Search Error: ', error);
     } else if (body.error) {
       console.log('Search Error: ', body.error);
     } else {
       console.log('Search Success: ', JSON.stringify(response.body));
-
-      const hits = body.hits.hits;
-      sendSearchResult(sender, query, hits);
+      sendSearchResult(sender, query, body.hits, from);
     }
   });
 };
@@ -126,10 +125,13 @@ const sendText = (sender, text, callback) => {
  *
  * @param sender
  * @param query
- * @param hits array
- * @param callback
+ * @param hitsRoot ※hits.hitsなので注意な
+ * @param offset
+ * @param callback optional
  */
-const sendSearchResult = (sender, query, hits, callback) => {
+const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
+  const hits = hitsRoot.hits;
+  const total = hitsRoot.total;
 
   // TODO: もうちょっとケアしてあげないと
   if (hits.length === 0) {

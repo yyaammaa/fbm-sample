@@ -75,7 +75,7 @@ app.post('/webhook/', (req, res) => {
         text = '寿司';
       }
 
-      nnp.handleSearch(sender,text);
+      nnp.handleSearch(sender, text, 0);
     } else {
       // text以外がきたとき (ステッカーとか位置情報とか画像とか)
       console.log('Receive non-text: ' + JSON.stringify(event.message) + '\nsender = ' + sender);
