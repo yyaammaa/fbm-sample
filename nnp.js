@@ -4,9 +4,43 @@ const request = require('request');
 const _ = require('lodash');
 const config = require('./config');
 const TOKEN = config('PAGE_ACCESS_TOKEN');
+const PAGE_ID = config('PAGE_ID');
 
 //const searchEndPoint = 'http://auone-elasticsearch-elb-133615898.ap-northeast-1.elb.amazonaws.com:9200/nanapi/v1/_search/template?timeout=50';
 const searchEndPoint = 'http://52.196.140.65:9200/nanapi/v1/_search/template?timeout=50';
+
+/**
+ * https://developers.facebook.com/docs/messenger-platform/send-api-reference#welcome_message_configuration
+ */
+const setWelcomeMessage = () => {
+  const messageData = {
+    "setting_type": "call_to_actions",
+    "thread_state": "new_thread",
+    "call_to_actions": [
+      {
+        "message": {
+          "text": "こんにちは!\n\nわからないこと・知りたいことをテキストで入力してください!"
+        }
+      }
+    ]
+  };
+
+  request(
+    {
+      url: 'https://graph.facebook.com/v2.6/' + PAGE_ID + '/thread_settings',
+      qs: {access_token: TOKEN},
+      method: 'POST',
+      json: messageData
+    },
+    (error, response, body) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(JSON.stringify(response));
+      }
+    }
+  );
+};
 
 const send = (sender, message, notificationType, callback) => {
   const type = notificationType || 'SILENT_PUSH';
@@ -273,5 +307,6 @@ const mockResponse = {
 module.exports = {
   search: search,
   sendGeneric: sendGeneric,
-  mockResponse: mockResponse
+  mockResponse: mockResponse,
+  setWelcomeMessage: setWelcomeMessage
 };

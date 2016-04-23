@@ -13,7 +13,9 @@ const config = {
   ENV: process.env.NODE_ENV,
   PORT: process.env.PORT,
   PROXY_URI: process.env.PROXY_URI,
-  PAGE_ACCESS_TOKEN: process.env.PAGE_ACCESS_TOKEN
+  PAGE_ACCESS_TOKEN: process.env.PAGE_ACCESS_TOKEN,
+  PAGE_ID: process.env.PAGE_ID,
+  APP_ID: process.env.APP_ID
 };
 
 module.exports = (key) => {

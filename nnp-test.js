@@ -3,7 +3,10 @@
 const nanapiSearch = require('./nnp').search;
 const sendGeneric = require('./nnp').sendGeneric;
 const mockResponse = require('./nnp').mockResponse;
+const setWelcomeMessage = require('./nnp').setWelcomeMessage;
 const _ = require('lodash');
+
+setWelcomeMessage();
 
 //nanapiSearch('犬', (error, response, body) => {
 //  if (error) {
