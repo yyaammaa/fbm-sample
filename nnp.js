@@ -183,7 +183,8 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
   console.log('offset = ' + offset + ', total = ' + total);
 
   // next page
-  if (SEARCH_SIZE + offset < total) {
+  // TODO: うーん...
+  if (parseInt(SEARCH_SIZE) + parseInt(offset) < parseInt(total)) {
     const nextOffset = parseInt(SEARCH_SIZE) + parseInt(offset);
     console.log('next offset = ' + nextOffset);
     elements.push({
