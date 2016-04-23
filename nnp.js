@@ -95,7 +95,7 @@ const handlePayload = (sender, payload) => {
 };
 
 const handleSearch = (sender, query) => {
-  search(query, (error, response, body) => {
+  search(query, 0, (error, response, body) => {
     if (error) {
       console.log('Search Error: ', error);
     } else if (body.error) {
@@ -193,7 +193,7 @@ const sendSearchResult = (sender, query, hits, callback) => {
 /**
  *
  * @param query
- * @param offset optional
+ * @param offset
  * @param callback optional
  */
 const search = (query, offset, callback) => {
