@@ -78,7 +78,6 @@ const rawSend = (sender, message, notificationType, callback) => {
   );
 };
 
-// TODO: ちゃんと処理する
 const handlePayload = (sender, payload) => {
   console.log('payload = ' + payload);
   const search = PAYLOAD.search + '?';
@@ -90,6 +89,7 @@ const handlePayload = (sender, payload) => {
       console.log('handlePayload: Error: no query');
     }
   } else {
+    // TODO:
     sendText(sender, 'その機能、まだ無いんですよね… 私も欲しいです。');
   }
 };
@@ -148,12 +148,13 @@ const sendSearchResult = (sender, query, hits, callback) => {
         "type": "web_url",
         "url": src.url,
         "title": "記事を見る"
-      },
-      {
-        "type": "postback",
-        "title": "似た記事を探す",
-        "payload": PAYLOAD.findSimilar
       }
+      //,
+      //{
+      //  "type": "postback",
+      //  "title": "似た記事を探す",
+      //  "payload": PAYLOAD.findSimilar
+      //}
     ];
 
     const categories = src.cate_path;
