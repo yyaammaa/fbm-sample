@@ -59,16 +59,20 @@ app.post('/webhook/', (req, res) => {
     if (event.message.text) {
       let text = event.message.text;
       console.log('Receive text: text = ' + text + ', sender = ' + sender);
+      if (text === '') {
+        console.log('Error: text is empty');
+        continue;
+      }
 
       if (text === 'whoami') {
         const m = 'heroku run bash\nRunning bash on fbm-sample... up, run.1428\n~ $ whoami\nu23298\n';
         nnp.sendText(sender, m);
-        return;
+        continue;
       }
 
       if (text === 'kill') {
         nnp.sendText(sender, 'マジで？');
-        return;
+        continue;
       }
 
       if (text === 'supership') {
@@ -84,7 +88,7 @@ app.post('/webhook/', (req, res) => {
       const stickerId = event.message.sticker_id || 0;
       if (stickerId === 369239263222822) {
         nnp.sendText(sender, 'Yay!');
-        return;
+        continue;
       }
 
       // TODO: もうちょっとケアしてあげないと
