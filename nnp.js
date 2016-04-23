@@ -185,7 +185,8 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
   console.log(
     'SEARCH_SIZE isNAN = ' + isNaN(SEARCH_SIZE) + '\n' +
     'offset isNAN = ' + isNaN(offset) + '\n' +
-    'total isNAN = ' + isNaN(total) + '\n'
+    'total isNAN = ' + isNaN(total) + '\n' +
+    'SEARCH_SIZE+offset isNAN = ' + isNaN(SEARCH_SIZE + offset) + '\n'
   );
 
   // next page
