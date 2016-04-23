@@ -94,7 +94,7 @@ app.post('/webhook/', (req, res) => {
       // いいね！が送られてきたとき
       const stickerId = event.message.sticker_id || 0;
       if (stickerId === 369239263222822) {
-        nnp.sendText(sender, 'Yay!');
+        nnp.sendText(sender, '(y)(y)(y)(y)(y)');
         return;
       }
 
