@@ -5,10 +5,7 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const request = require('request');
-const api = require('./api');
-const nanapiSearch = require('./nnp').search;
-const sendSearchResult = require('./nnp').sendSearchResult;
-const sendText = require('./nnp').sendText;
+const nnp = require('./nnp');
 const _ = require('lodash');
 
 app.set('port', (process.env.PORT || 5000));
@@ -48,15 +45,20 @@ app.post('/webhook/', (req, res) => {
 
     if (event.postback) {
       const payload = event.postback.payload;
-      api.handlePayload(sender, payload);
+      nnp.handlePayload(sender, payload);
       continue;
     }
 
-    if (event.message && event.message.text) {
+    if (!event.message) {
+      console.log('no message here');
+      continue;
+    }
+
+    if (event.message.text) {
       let text = event.message.text;
       console.log('Receive text: text = ' + text + ', sender = ' + sender);
 
-      nanapiSearch(text, (error, response, body) => {
+      nnp.search(text, (error, response, body) => {
         if (error) {
           console.log('Error: ', error);
           //} else if (response.body.error) {
@@ -65,13 +67,13 @@ app.post('/webhook/', (req, res) => {
           console.log('Success: ', JSON.stringify(response.body));
 
           const hits = body.hits.hits;
-          sendSearchResult(sender, text, hits);
+          nnp.sendSearchResult(sender, text, hits);
         }
       });
-    } else if (event.message && !event.message.text) {
+    } else {
       // text以外がきたとき (ステッカーとか位置情報とか画像とか)
       console.log('Receive non-text: ' + JSON.stringify(event.message) + '\nsender = ' + sender);
-      sendText(sender, 'テキスト以外の入力はいまのところできません\n\nテキストで何か入力してみてください');
+      nnp.sendText(sender, 'テキスト以外の入力はいまのところできません\n\nテキストで何か入力してみてください');
     }
   }
 });

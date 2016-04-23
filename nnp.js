@@ -71,6 +71,10 @@ const rawSend = (sender, message, notificationType, callback) => {
   );
 };
 
+const handlePayload = (sender, payload) => {
+  sendText(sender, 'その機能、まだ無いんですよね… 私も欲しいです。');
+};
+
 /**
  *
  * @param sender
@@ -278,6 +282,7 @@ const mockResponse = {
 module.exports = {
   search: search,
   sendText: sendText,
+  handlePayload: handlePayload,
   sendSearchResult: sendSearchResult,
   mockResponse: mockResponse,
   setWelcomeMessage: setWelcomeMessage
