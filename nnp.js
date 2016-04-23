@@ -190,7 +190,14 @@ const sendSearchResult = (sender, query, hits, callback) => {
   rawSend(sender, messageData, callback);
 };
 
-const search = (query, callback) => {
+/**
+ *
+ * @param query
+ * @param offset optional
+ * @param callback optional
+ */
+const search = (query, offset, callback) => {
+  const from = offset || 0;
   const time = Math.floor(new Date().getTime() / 1000);
 
   request(
@@ -203,7 +210,7 @@ const search = (query, callback) => {
         },
         "params": {
           "query": query,
-          "from": 0,
+          "from": from,
           "size": 5,
           "time": time
         }
