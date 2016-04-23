@@ -6,8 +6,13 @@ const mockResponse = require('./nnp').mockResponse;
 const setWelcomeMessage = require('./nnp').setWelcomeMessage;
 const _ = require('lodash');
 const truncate = require('truncate');
+const qs = require('qs');
 
-console.log(truncate('あいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえお', 20));
+const sushi = 'SEARCH?query=山の選び方';
+const q = qs.parse(sushi.substr('SEARCH?'.length));
+console.log(q);
+
+//console.log(truncate('あいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえお', 20));
 
 //setWelcomeMessage();
 

@@ -3,6 +3,7 @@
 const request = require('request');
 const _ = require('lodash');
 const truncate = require('truncate');
+const queryParser = require('qs');
 const config = require('./config');
 const TOKEN = config('PAGE_ACCESS_TOKEN');
 const PAGE_ID = config('PAGE_ID');
@@ -80,7 +81,17 @@ const rawSend = (sender, message, notificationType, callback) => {
 // TODO: ちゃんと処理する
 const handlePayload = (sender, payload) => {
   console.log('payload = ' + payload);
-  sendText(sender, 'その機能、まだ無いんですよね… 私も欲しいです。');
+  const search = PAYLOAD.search + '?';
+  if (payload.includes(search)) {
+    const qs = queryParser.parse(payload.substr(search.length));
+    if (qs.query) {
+      handleSearch(sender, qs.query);
+    } else {
+      console.log('handlePayload: Error: no query');
+    }
+  } else {
+    sendText(sender, 'その機能、まだ無いんですよね… 私も欲しいです。');
+  }
 };
 
 const handleSearch = (sender, query) => {
