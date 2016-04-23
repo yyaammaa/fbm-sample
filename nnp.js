@@ -184,7 +184,7 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
 
   // next page
   if (SEARCH_SIZE + offset < total) {
-    const nextOffset = SEARCH_SIZE + offset;
+    const nextOffset = parseInt(SEARCH_SIZE) + parseInt(offset);
     console.log('next offset = ' + nextOffset);
     elements.push({
       "title": '検索結果',
