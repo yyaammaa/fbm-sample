@@ -73,6 +73,17 @@ app.post('/webhook/', (req, res) => {
     } else {
       // text以外がきたとき (ステッカーとか位置情報とか画像とか)
       console.log('Receive non-text: ' + JSON.stringify(event.message) + '\nsender = ' + sender);
+
+      // TODO: イースターエッグを増やす
+      const stickerId = event.message.sticker_id || 0;
+
+      // いいね！が送られてきたとき
+      if (stickerId === 369239263222822) {
+        nnp.sendText(sender, 'Yay!');
+        return;
+      }
+
+      // TODO: もうちょっとケアしてあげないと
       nnp.sendText(sender, 'テキスト以外の入力はいまのところできません\n\nテキストで何か入力してみてください');
     }
   }

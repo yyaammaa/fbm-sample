@@ -71,6 +71,7 @@ const rawSend = (sender, message, notificationType, callback) => {
   );
 };
 
+// TODO: ちゃんと処理する
 const handlePayload = (sender, payload) => {
   sendText(sender, 'その機能、まだ無いんですよね… 私も欲しいです。');
 };
@@ -96,6 +97,8 @@ const sendText = (sender, text, callback) => {
  * @param callback
  */
 const sendSearchResult = (sender, query, hits, callback) => {
+
+  // TODO: もうちょっとケアしてあげないと
   if (hits.length === 0) {
     const message = query + " に該当する記事は見つかりませんでした...\n\n他のキーワードを入力してみてください";
     sendText(sender, message);
@@ -154,7 +157,7 @@ const search = (query, callback) => {
         "params": {
           "query": query,
           "from": 0,
-          "size": 3,
+          "size": 5,
           "time": time
         }
       }
