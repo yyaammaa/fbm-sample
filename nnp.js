@@ -111,25 +111,35 @@ const sendSearchResult = (sender, query, hits, callback) => {
   const elements = _.map(hits, hit => {
     const src = hit._source;
 
+    let buttons = [
+      {
+        "type": "web_url",
+        "url": src.url,
+        "title": "記事を見る"
+      },
+      {
+        "type": "postback",
+        "title": "似た記事を探す",
+        "payload": "Payload for first element in a generic bubble"
+      }
+    ];
+
+    const categories = src.cate_path;
+    if (categories && categories.length > 0) {
+      const title = categories[0] + 'の記事を探す';
+      buttons.push({
+        "type": "postback",
+        "title": title,
+        "payload": "Payload for first element in a generic bubble"
+      });
+    }
+
     return {
-      //"title": src.title.substr(0, 20),
-      //"subtitle": src.desc.substr(0, 38),
       "title": truncate(src.title, 20),
       "subtitle": truncate(src.desc, 38),
       "image_url": 'https:' + src.image_url,
       "item_url": src.url,
-      "buttons": [
-        {
-          "type": "web_url",
-          "url": src.url,
-          "title": "記事を見る"
-        },
-        {
-          "type": "postback",
-          "title": "似た記事を探す",
-          "payload": "Payload for first element in a generic bubble",
-        }
-      ]
+      "buttons": buttons
     }
   });
 
