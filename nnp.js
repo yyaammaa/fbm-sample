@@ -87,14 +87,18 @@ const sendText = (sender, text, callback) => {
 /**
  *
  * @param sender
+ * @param query
  * @param hits array
  * @param callback
  */
-const sendSearchResult = (sender, hits, callback) => {
+const sendSearchResult = (sender, query, hits, callback) => {
   if (hits.length === 0) {
-    sendText(sender, '見つかりませんでした...\n他のキーワードを入力してみてください');
+    const message = query + " に該当する記事は見つかりませんでした...\n\n他のキーワードを入力してみてください";
+    sendText(sender, message);
     return;
   }
+
+  sendText(sender, query + " に関する記事です。");
 
   const elements = _.map(hits, hit => {
     const src = hit._source;
