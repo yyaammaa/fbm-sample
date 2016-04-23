@@ -36,7 +36,7 @@ app.get('/webhook/', (req, res) => {
 });
 
 app.post('/webhook/', (req, res) => {
-  console.log(req.body);
+  console.log(JSON.stringify(req.body));
 
   // TODO: 0以外もちゃんと処理する
   let messaging_events = req.body.entry[0].messaging;
