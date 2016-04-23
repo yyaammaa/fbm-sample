@@ -84,8 +84,9 @@ const handlePayload = (sender, payload) => {
   if (payload.includes(search)) {
     const qs = queryParser.parse(payload.substr(search.length));
     if (qs.query) {
-      const offset = qs.offset || 0;
-      handleSearch(sender, qs.query, offset);
+      const offsetString = qs.offset || '0';
+
+      handleSearch(sender, qs.query, parseInt(offsetString));
     } else {
       console.log('handlePayload: Error: no query');
     }
