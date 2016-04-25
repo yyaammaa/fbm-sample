@@ -242,6 +242,7 @@ const sendSearchResult = (sender, query, hitsRoot, offset, callback) => {
 const search = (query, offset, callback) => {
   const from = offset || 0;
   const time = Math.floor(new Date().getTime() / 1000);
+  const escaped = escapeQuery(query);
 
   request(
     {
@@ -252,7 +253,7 @@ const search = (query, offset, callback) => {
           "file": "nanapiDDTempl"
         },
         "params": {
-          "query": escapeQuery(query),
+          "query": escaped,
           "from": from,
           "size": SEARCH_SIZE,
           "time": time
