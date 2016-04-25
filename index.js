@@ -59,6 +59,10 @@ app.post('/webhook/', (req, res) => {
     if (event.message.text) {
       let text = event.message.text;
       console.log('Receive text: text = ' + text + ', sender = ' + sender);
+
+      // escape
+      text = nnp.escapeQuery(text);
+
       if (text === '') {
         console.log('Error: text is empty');
         continue;

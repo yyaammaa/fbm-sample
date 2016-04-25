@@ -4,13 +4,17 @@ const nanapiSearch = require('./nnp').search;
 const sendGeneric = require('./nnp').sendSearchResult;
 const mockResponse = require('./nnp').mockResponse;
 const setWelcomeMessage = require('./nnp').setWelcomeMessage;
+const escapeQuery = require('./nnp').escapeQuery;
 const _ = require('lodash');
 const truncate = require('truncate');
 const qs = require('qs');
 
-const sushi = 'SEARCH?query=山の選び方';
-const q = qs.parse(sushi.substr('SEARCH?'.length));
-console.log(q);
+const q = ':smi*le: go! \"rr^r\" (yo) ~tmp :^!*~()"\^^^:;';
+console.log(escapeQuery(q));
+
+//const sushi = 'SEARCH?query=山の選び方';
+//const q = qs.parse(sushi.substr('SEARCH?'.length));
+//console.log(q);
 
 //console.log(truncate('あいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえお', 20));
 

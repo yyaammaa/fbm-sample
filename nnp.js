@@ -379,6 +379,20 @@ const mockResponse = {
   }
 };
 
+const escapeQuery = (query) => {
+  if (!query) return '';
+  return query
+    .replace(/\*/g, '※')
+    .replace(/~/g, '〜')
+    .replace(/!/g, '！')
+    .replace(/\(/g, '（')
+    .replace(/\)/g, '）')
+    .replace(/"/g, '')
+    .replace(/\^/g, '')
+    .replace(/:/g, '')
+    ;
+};
+
 module.exports = {
   search: search,
   handleSearch: handleSearch,
@@ -386,6 +400,7 @@ module.exports = {
   handlePayload: handlePayload,
   sendSearchResult: sendSearchResult,
   mockResponse: mockResponse,
-  setWelcomeMessage: setWelcomeMessage
+  setWelcomeMessage: setWelcomeMessage,
+  escapeQuery: escapeQuery
 }
 ;
