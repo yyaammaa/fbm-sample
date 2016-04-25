@@ -252,7 +252,7 @@ const search = (query, offset, callback) => {
           "file": "nanapiDDTempl"
         },
         "params": {
-          "query": query,
+          "query": escapeQuery(query),
           "from": from,
           "size": SEARCH_SIZE,
           "time": time
