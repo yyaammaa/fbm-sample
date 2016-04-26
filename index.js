@@ -43,6 +43,23 @@ app.post('/webhook/', (req, res) => {
     const event = req.body.entry[0].messaging[i];
     const sender = event.sender.id;
 
+    // messaging_optinsは "Send to Messenger" plugin を実装する場合に必要
+    // https://developers.facebook.com/docs/messenger-platform/implementation#send_to_messenger_plugin
+
+    // https://developers.facebook.com/docs/messenger-platform/webhook-reference#message_delivery
+    // midsは無い場合があるらしい
+    if (event.delivery) {
+      const watermark = event.delivery.watermark;
+      const seq = event.delivery.seq;
+
+      console.log(
+        'Message-Delivered: sender = ' + sender +
+        ', watermark = ' + watermark +
+        ', seq = ' + seq
+      );
+      continue;
+    }
+
     if (event.postback) {
       const payload = event.postback.payload;
       nnp.handlePayload(sender, payload);
