@@ -40,7 +40,7 @@ app.post('/webhook/', (req, res) => {
   // entry[0]以外も処理する必要があるのかどうがわからんが一応処理しとく
   const entries = req.body.entry;
   const messagings = _.map(entries, entry => {
-    return entry.messagings;
+    return entry.messaging;
   });
 
   for (let i = 0; i < messagings.length; i++) {
