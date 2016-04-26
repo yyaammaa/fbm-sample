@@ -94,7 +94,7 @@ const handlePostback = (sender, postback) => {
 
   const search = PAYLOAD.search + '?';
   if (payload.includes(search)) {
-    const qs = queryParser.parse(payload.substr(search.length));
+    const qs = queryParser.parse(payload.substr(search.length), 10);
     if (qs.query) {
       const offsetString = qs.offset || '0';
       handleSearch(sender, qs.query, parseInt(offsetString));
