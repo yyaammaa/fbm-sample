@@ -38,15 +38,25 @@ app.post('/webhook/', (req, res) => {
   res.sendStatus(200);
 
   // entry[0]以外も処理する必要があるのかどうがわからんが一応処理しとく
+  let events = [];
   const entries = req.body.entry;
-  const messagings = _.map(entries, entry => {
-    return entry.messaging;
+  _.each(entries, entry => {
+    const messagings = entry.messaging;
+    if (messagings) {
+      _.each(messagings, mes => {
+        events.push(mes);
+      });
+    }
   });
-
-  for (let i = 0; i < messagings.length; i++) {
-    const event = messagings[i];
+  for (let i = 0; i < events.length; i++) {
+    const event = events[i];
     console.log('Event = ' + JSON.stringify(event));
     const sender = event.sender.id;
+
+    //for (let i = 0; i < messagings.length; i++) {
+    //  const event = messagings[i];
+    //  console.log('Event = ' + JSON.stringify(event));
+    //  const sender = event.sender.id;
 
     //  const messagingEvents = req.body.entry[0].messaging;
     //for (let i = 0; i < messagingEvents.length; i++) {
