@@ -37,11 +37,20 @@ app.post('/webhook/', (req, res) => {
   console.log(JSON.stringify(req.body));
   res.sendStatus(200);
 
-  // TODO: entry[0]以外も処理する必要がある?
-  const messagingEvents = req.body.entry[0].messaging;
-  for (let i = 0; i < messagingEvents.length; i++) {
-    const event = req.body.entry[0].messaging[i];
+  // entry[0]以外も処理する必要があるのかどうがわからんが一応処理しとく
+  const entries = req.body.entry;
+  const messegings = _.map(entries, entry => {
+    return entry.messegings;
+  });
+
+  for (let i = 0; i < messegings.length; i++) {
+    const event = messegings[i];
     const sender = event.sender.id;
+
+    //  const messagingEvents = req.body.entry[0].messaging;
+    //for (let i = 0; i < messagingEvents.length; i++) {
+    //  const event = req.body.entry[0].messaging[i];
+    //  const sender = event.sender.id;
 
     // messaging_optinsは "Send to Messenger" plugin を実装する場合に必要
     // https://developers.facebook.com/docs/messenger-platform/implementation#send_to_messenger_plugin
