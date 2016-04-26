@@ -48,20 +48,11 @@ app.post('/webhook/', (req, res) => {
       });
     }
   });
+
   for (let i = 0; i < events.length; i++) {
     const event = events[i];
     console.log('Event = ' + JSON.stringify(event));
     const sender = event.sender.id;
-
-    //for (let i = 0; i < messagings.length; i++) {
-    //  const event = messagings[i];
-    //  console.log('Event = ' + JSON.stringify(event));
-    //  const sender = event.sender.id;
-
-    //  const messagingEvents = req.body.entry[0].messaging;
-    //for (let i = 0; i < messagingEvents.length; i++) {
-    //  const event = req.body.entry[0].messaging[i];
-    //  const sender = event.sender.id;
 
     // messaging_optinsは "Send to Messenger" plugin を実装する場合に必要
     // https://developers.facebook.com/docs/messenger-platform/implementation#send_to_messenger_plugin
