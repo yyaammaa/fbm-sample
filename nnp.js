@@ -78,8 +78,20 @@ const rawSend = (sender, message, notificationType, callback) => {
   );
 };
 
-const handlePayload = (sender, payload) => {
+const handleDelivery = (sender, delivery) => {
+  const watermark = delivery.watermark;
+  const seq = delivery.seq;
+  console.log(
+    'Message-Delivered: sender = ' + sender +
+    ', watermark = ' + watermark +
+    ', seq = ' + seq
+  );
+};
+
+const handlePostback = (sender, postback) => {
+  const payload = postback.payload;
   console.log('payload = ' + payload);
+
   const search = PAYLOAD.search + '?';
   if (payload.includes(search)) {
     const qs = queryParser.parse(payload.substr(search.length));
@@ -87,7 +99,7 @@ const handlePayload = (sender, payload) => {
       const offsetString = qs.offset || '0';
       handleSearch(sender, qs.query, parseInt(offsetString));
     } else {
-      console.log('handlePayload: Error: no query');
+      console.log('handlePostback: Error: no query');
     }
   } else {
     // TODO:
@@ -398,7 +410,8 @@ module.exports = {
   search: search,
   handleSearch: handleSearch,
   sendText: sendText,
-  handlePayload: handlePayload,
+  handlePostback: handlePostback,
+  handleDelivery: handleDelivery,
   sendSearchResult: sendSearchResult,
   mockResponse: mockResponse,
   setWelcomeMessage: setWelcomeMessage,

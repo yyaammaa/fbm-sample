@@ -47,22 +47,15 @@ app.post('/webhook/', (req, res) => {
     // https://developers.facebook.com/docs/messenger-platform/implementation#send_to_messenger_plugin
 
     // https://developers.facebook.com/docs/messenger-platform/webhook-reference#message_delivery
-    // midsは無い場合があるらしい
+    // - midsは無い場合があるらしい
+    // - これは「既読」ではなく、単なる送信完了の通知
     if (event.delivery) {
-      const watermark = event.delivery.watermark;
-      const seq = event.delivery.seq;
-
-      console.log(
-        'Message-Delivered: sender = ' + sender +
-        ', watermark = ' + watermark +
-        ', seq = ' + seq
-      );
+      nnp.handleDelivery(sender, event.delivery);
       continue;
     }
 
     if (event.postback) {
-      const payload = event.postback.payload;
-      nnp.handlePayload(sender, payload);
+      nnp.handlePostback(sender, event.postback);
       continue;
     }
 
