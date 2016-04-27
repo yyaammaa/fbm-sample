@@ -27,17 +27,13 @@ if (!db) {
   console.log('Database connection already established');
 }
 
-const add = (type, message) => {
+const rawAdd = (json) => {
   if (!db) {
     console.log('add: no db available');
     return;
   }
 
-  const json = {
-    type: type || 'unknown',
-    message: message || '',
-    timestamp: new Date().getTime()
-  };
+  json.timestamp = new Date().getTime();
 
   db.collection(COLLECTION_LOG).insertOne(json, (err, doc) => {
     if (err) {
@@ -45,6 +41,13 @@ const add = (type, message) => {
     } else {
       console.log('add: success: ' + JSON.stringify(doc));
     }
+  });
+};
+
+const add = (type, message) => {
+  rawAdd({
+    type: type || 'unknown',
+    message: message || ''
   });
 };
 
