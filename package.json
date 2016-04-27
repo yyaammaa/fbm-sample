@@ -4,7 +4,7 @@
   "description": "fbm-sample",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node cluster.js",
     "test": "jest"
   },
   "dependencies": {
@@ -15,6 +15,7 @@
     "lodash": "^4.8.2",
     "qs": "^6.1.0",
     "request": "^2.71.0",
+    "throng": "^4.0.0",
     "truncate": "^2.0.0"
   },
   "engines": {

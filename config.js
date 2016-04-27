@@ -15,7 +15,8 @@ const config = {
   PROXY_URI: process.env.PROXY_URI,
   PAGE_ACCESS_TOKEN: process.env.PAGE_ACCESS_TOKEN,
   PAGE_ID: process.env.PAGE_ID,
-  APP_ID: process.env.APP_ID
+  APP_ID: process.env.APP_ID,
+  WEB_CONCURRENCY: process.env.WEB_CONCURRENCY || 1
 };
 
 module.exports = (key) => {
