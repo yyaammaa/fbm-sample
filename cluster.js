@@ -8,7 +8,7 @@ const config = require('./config');
 
 throng(
   {
-    workers: config('WEB_CONCURRENCY'),
+    workers: config.WEB_CONCURRENCY,
     lifetime: Infinity
   }, (id) => {
     console.log(`Started worker ${id}`);

@@ -19,8 +19,4 @@ const config = {
   WEB_CONCURRENCY: process.env.WEB_CONCURRENCY || 1
 };
 
-module.exports = (key) => {
-  if (!key) return config;
-
-  return config[key]
-};
+module.exports = config;

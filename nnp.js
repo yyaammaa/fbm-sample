@@ -5,8 +5,8 @@ const _ = require('lodash');
 const truncate = require('truncate');
 const queryParser = require('qs');
 const config = require('./config');
-const TOKEN = config('PAGE_ACCESS_TOKEN');
-const PAGE_ID = config('PAGE_ID');
+const TOKEN = config.PAGE_ACCESS_TOKEN;
+const PAGE_ID = config.PAGE_ID;
 
 //const SEARCH_ENDPOINT = 'http://auone-elasticsearch-elb-133615898.ap-northeast-1.elb.amazonaws.com:9200/nanapi/v1/_search/template?timeout=50';
 const SEARCH_ENDPOINT = 'http://52.196.140.65:9200/nanapi/v1/_search/template?timeout=50';
