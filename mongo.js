@@ -44,13 +44,24 @@ const rawAdd = (json) => {
   });
 };
 
-const add = (type, message) => {
+const trackTextReceived = (sender, text) => {
   rawAdd({
-    type: type || 'unknown',
-    message: message || ''
+    type: 'textReceived',
+    sender: sender || '',
+    text: text || ''
+  });
+};
+
+const trackSearch = (sender, query, offset) => {
+  rawAdd({
+    type: 'search',
+    sender: sender || '',
+    query: query || '',
+    offset: offset || 0
   });
 };
 
 module.exports = {
-  add: add
+  trackTextReceived: trackTextReceived,
+  trackSearch: trackSearch
 };

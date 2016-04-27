@@ -51,8 +51,6 @@ const setWelcomeMessage = () => {
 };
 
 const rawSend = (sender, message, notificationType, callback) => {
-  db.add('rawSend', sender);
-
   const type = notificationType || 'SILENT_PUSH';
   request(
     {
@@ -112,6 +110,8 @@ const handlePostback = (sender, postback) => {
 
 const handleSearch = (sender, query, offset) => {
   const from = offset || 0;
+  db.trackSearch(sender, query, offset);
+
   search(query, from, (error, response, body) => {
     if (error) {
       console.log('Search Error: ', error);

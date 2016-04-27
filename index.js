@@ -83,6 +83,7 @@ app.post('/webhook/', (req, res) => {
     if (event.message.text) {
       let text = event.message.text;
       console.log('Receive text: text = ' + text + ', sender = ' + sender);
+      db.trackTextReceived(sender, text);
 
       // escape
       // text = nnp.escapeQuery(text);
