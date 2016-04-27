@@ -1,16 +1,19 @@
 'use strict';
 
-const nanapiSearch = require('./nnp').search;
-const sendGeneric = require('./nnp').sendSearchResult;
-const mockResponse = require('./nnp').mockResponse;
-const setWelcomeMessage = require('./nnp').setWelcomeMessage;
-const escapeQuery = require('./nnp').escapeQuery;
-const _ = require('lodash');
-const truncate = require('truncate');
-const qs = require('qs');
+//const nanapiSearch = require('./nnp').search;
+//const sendGeneric = require('./nnp').sendSearchResult;
+//const mockResponse = require('./nnp').mockResponse;
+//const setWelcomeMessage = require('./nnp').setWelcomeMessage;
+//const escapeQuery = require('./nnp').escapeQuery;
+//const _ = require('lodash');
+//const truncate = require('truncate');
+//const qs = require('qs');
+//const db = require('./mongo');
+//
+//db.add('test', '183984942 289 892');
 
-const q = ':smi*le: go! \"rr^r\" (yo) ~tmp :^!*~()"\^^^:;';
-console.log(escapeQuery(q));
+//const q = ':smi*le: go! \"rr^r\" (yo) ~tmp :^!*~()"\^^^:;';
+//console.log(escapeQuery(q));
 
 //const sushi = 'SEARCH?query=山の選び方';
 //const q = qs.parse(sushi.substr('SEARCH?'.length));

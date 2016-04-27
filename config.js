@@ -13,10 +13,13 @@ const config = {
   ENV: process.env.NODE_ENV,
   PORT: process.env.PORT,
   PROXY_URI: process.env.PROXY_URI,
+  WEB_CONCURRENCY: process.env.WEB_CONCURRENCY || 1,
+  // mongo
+  MONGODB_URI: process.env.MONGODB_URI,
+  // facebook
   PAGE_ACCESS_TOKEN: process.env.PAGE_ACCESS_TOKEN,
   PAGE_ID: process.env.PAGE_ID,
-  APP_ID: process.env.APP_ID,
-  WEB_CONCURRENCY: process.env.WEB_CONCURRENCY || 1
+  APP_ID: process.env.APP_ID
 };
 
 module.exports = config;

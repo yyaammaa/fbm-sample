@@ -4,6 +4,7 @@ const request = require('request');
 const _ = require('lodash');
 const truncate = require('truncate');
 const queryParser = require('qs');
+const db = require('./mongo');
 const config = require('./config');
 const TOKEN = config.PAGE_ACCESS_TOKEN;
 const PAGE_ID = config.PAGE_ID;
@@ -50,6 +51,8 @@ const setWelcomeMessage = () => {
 };
 
 const rawSend = (sender, message, notificationType, callback) => {
+  db.add('rawSend', 'sender');
+
   const type = notificationType || 'SILENT_PUSH';
   request(
     {

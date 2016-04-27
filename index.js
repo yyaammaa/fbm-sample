@@ -1,5 +1,8 @@
 'use strict';
 
+// for initializing mongo
+const db = require('./mongo');
+
 const express = require('express');
 const app = express();
 const path = require('path');
