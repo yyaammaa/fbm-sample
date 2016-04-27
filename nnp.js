@@ -51,7 +51,7 @@ const setWelcomeMessage = () => {
 };
 
 const rawSend = (sender, message, notificationType, callback) => {
-  db.add('rawSend', 'sender');
+  db.add('rawSend', sender);
 
   const type = notificationType || 'SILENT_PUSH';
   request(
